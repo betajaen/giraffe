@@ -1,15 +1,22 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using System.Collections;
 
-public class LayerEditor : MonoBehaviour {
+[CustomEditor(typeof(GiraffeLayer))]
+public class GiraffeLayerEditor : Editor
+{
+  public override void OnInspectorGUI()
+  {
+    GiraffeLayer t = (GiraffeLayer)this.target;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    int zOrder = EditorGUILayout.IntField("Z-Order", t.zOrder);
+    if (zOrder != t.zOrder)
+    {
+      t.zOrder = zOrder;
+      if (Application.isPlaying == false)
+      {
+        EditorUtility.SetDirty(t);
+      }
+    }
+  }
 }
