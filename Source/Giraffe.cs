@@ -22,18 +22,14 @@ public class Giraffe : MonoBehaviour
     mCamera.farClipPlane = 10.0f;
     mCamera.depth = 100;
     mCamera.orthographic = true;
+
+    transform.position = Vector3.zero;
+    transform.rotation = Quaternion.identity;
   }
 
   void Start()
   {
-    mMaterial = new Material("Shader \"Hidden/SetAlpha\" {" +
-        "SubShader {" +
-        "	Pass {" +
-        "		Color (1,1,1,1)" +
-        "	}" +
-        "}" +
-        "}"
-      );
+    mMaterial = new Material(Shader.Find("Giraffe/Standard"));
   }
 
   public void AddLayer(GiraffeLayer layer)
@@ -58,7 +54,6 @@ public class Giraffe : MonoBehaviour
   void Update()
   {
     mCamera.orthographicSize = Screen.height * 0.5f;
-
 
     int count = mLayers.Count;
     for (int i = 0; i < count; i++)

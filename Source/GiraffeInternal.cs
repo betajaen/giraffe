@@ -18,6 +18,7 @@ namespace GiraffeInternal
   class MeshBuffer
   {
     public Vector3[] position;
+    public Vector2[] uv;
     public int[] indexes;
     public int nbVertices;
     public int nbIndexes;
@@ -39,6 +40,7 @@ namespace GiraffeInternal
         Debug.Log("Resizing verts");
         nbVertices = vertexCount;
         position = new Vector3[nbVertices];
+        uv = new Vector2[nbVertices];
       }
 
       if (indexCount != nbIndexes)
@@ -60,11 +62,21 @@ namespace GiraffeInternal
     private int mEstimatedQuads;
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
+    private Vector3 mTexelOffset;
 
     public Layer(Mesh mesh)
     {
       mMesh = mesh;
       mBuffer = new MeshBuffer(mMesh);
+
+      // Texel
+      if (Application.platform == RuntimePlatform.WindowsPlayer ||
+          Application.platform == RuntimePlatform.WindowsWebPlayer ||
+          Application.platform == RuntimePlatform.WindowsEditor)
+      {
+        mTexelOffset = new Vector3(0.5f, -0.5f, 0.0f);
+      }
+
     }
 
     void Delete()
@@ -87,7 +99,7 @@ namespace GiraffeInternal
     public void Draw()
     {
       mDrawCount++;
-      Graphics.DrawMeshNow(mMesh, new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0f), Quaternion.identity);
+      Graphics.DrawMeshNow(mMesh, mTexelOffset + new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0f), Quaternion.identity);
     }
 
     public void BeginEstimation()
@@ -128,7 +140,7 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      const float depth = 1.0f;
+      const float depth = 0.0f;
       const float yScale = -1.0f;
 
       tQ0.x = position.x;
@@ -167,6 +179,7 @@ namespace GiraffeInternal
     {
       mMesh.MarkDynamic();
       mMesh.vertices = mBuffer.position;
+      mMesh.uv = mBuffer.uv;
       mMesh.SetIndices(mBuffer.indexes, MeshTopology.Triangles, 0);
     }
 
