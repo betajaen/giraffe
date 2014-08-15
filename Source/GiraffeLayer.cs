@@ -15,6 +15,9 @@ public class GiraffeLayer : MonoBehaviour
   [SerializeField]
   private int mZOrder;
 
+  [SerializeField]
+  private GiraffeAtlas mAtlas;
+
   public Mesh mMesh;
 
   void Awake()
@@ -35,7 +38,7 @@ public class GiraffeLayer : MonoBehaviour
     }
 
     mMesh = new Mesh();
-    mLayer = new Layer(mMesh);
+    mLayer = new Layer(mMesh, mAtlas.material);
   }
 
   void OnApplicationQuit()
@@ -69,9 +72,23 @@ public class GiraffeLayer : MonoBehaviour
     mDirty = true;
   }
 
+  public GiraffeAtlas atlas
+  {
+    get
+    {
+      return mAtlas;
+    }
+
+    set
+    {
+      if (mAtlas == value)
+        return;
+      mAtlas = value;
+    }
+  }
+
   public int zOrder
   {
-
     get
     {
       return mZOrder;
@@ -87,7 +104,6 @@ public class GiraffeLayer : MonoBehaviour
         mGiraffe.DrawOrderChanged();
       }
     }
-
   }
 
   public void UpdateLayer()

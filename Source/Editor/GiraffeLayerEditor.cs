@@ -9,6 +9,17 @@ public class GiraffeLayerEditor : Editor
   {
     GiraffeLayer t = (GiraffeLayer)this.target;
 
+    GiraffeAtlas atlas = EditorGUILayout.ObjectField("Atlas", t.atlas, typeof(GiraffeAtlas)) as GiraffeAtlas;
+    if (atlas != t.atlas)
+    {
+      t.atlas = atlas;
+      if (Application.isPlaying == false)
+      {
+        EditorUtility.SetDirty(t);
+      }
+    }
+
+
     int zOrder = EditorGUILayout.IntField("Z-Order", t.zOrder);
     if (zOrder != t.zOrder)
     {

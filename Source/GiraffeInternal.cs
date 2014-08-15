@@ -6,15 +6,6 @@ using System.Collections;
 namespace GiraffeInternal
 {
 
-  static class Common
-  {
-    static void ConfigureCamera(Camera camera)
-    {
-      camera.cullingMask = 0;
-      camera.rect = new Rect(0, 0, 1, 1);
-    }
-  }
-
   class MeshBuffer
   {
     public Vector3[] position;
@@ -59,14 +50,16 @@ namespace GiraffeInternal
 
     private MeshBuffer mBuffer;
     private Mesh mMesh;
+    private Material mMaterial;
     private int mEstimatedQuads;
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
     private Vector3 mTexelOffset;
 
-    public Layer(Mesh mesh)
+    public Layer(Mesh mesh, Material material)
     {
       mMesh = mesh;
+      mMaterial = material;
       mBuffer = new MeshBuffer(mMesh);
 
       // Texel
@@ -91,15 +84,15 @@ namespace GiraffeInternal
       EndEstimation();
 
       Begin();
-      Quad(new Vector2(10.0f, 10.0f), new Vector2(100.0f, 100.0f));
+      Quad(new Vector2(10.0f, 10.0f), new Vector2(32.0f, 32.0f), new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f));
       End();
-
     }
 
     public void Draw()
     {
       mDrawCount++;
-      Graphics.DrawMeshNow(mMesh, mTexelOffset + new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0f), Quaternion.identity);
+      mMaterial.SetPass(0);
+      Graphics.DrawMeshNow(mMesh, new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f), Quaternion.identity);
     }
 
     public void BeginEstimation()
@@ -130,9 +123,10 @@ namespace GiraffeInternal
       mIndex = 0;
     }
 
-    static Vector3 tQ0, tQ1, tQ2, tQ3;
+    private static Vector3 tP0, tP1, tP2, tP3;
+    private static Vector2 tU0, tU1, tU2, tU3;
 
-    public void Quad(Vector2 position, Vector2 size)
+    public void Quad(Vector2 position, Vector2 size, Vector2 uvPosition, Vector2 uvSize)
     {
 
       // 0---1
@@ -143,26 +137,41 @@ namespace GiraffeInternal
       const float depth = 0.0f;
       const float yScale = -1.0f;
 
-      tQ0.x = position.x;
-      tQ0.y = yScale * position.y;
-      tQ0.z = depth;
+      tP0.x = position.x;
+      tP0.y = yScale * position.y;
+      tP0.z = depth;
+      tU0.x = uvPosition.x;
+      tU0.y = 1.0f - uvPosition.y;
 
-      tQ1.x = position.x + size.x;
-      tQ1.y = yScale * position.y;
-      tQ1.z = depth;
+      tP1.x = position.x + size.x;
+      tP1.y = yScale * position.y;
+      tP1.z = depth;
+      tU1.x = uvPosition.x + uvSize.x;
+      tU1.y = 1.0f - uvPosition.y;
 
-      tQ2.x = position.x + size.x;
-      tQ2.y = yScale * (position.y + size.y);
-      tQ2.z = depth;
+      tP2.x = position.x + size.x;
+      tP2.y = yScale * (position.y + size.y);
+      tP2.z = depth;
+      tU2.x = uvPosition.x + uvSize.x;
+      tU2.y = 1.0f - (uvPosition.y + uvSize.y);
 
-      tQ3.x = position.x;
-      tQ3.y = yScale * (position.y + size.y);
-      tQ3.z = depth;
+      tP3.x = position.x;
+      tP3.y = yScale * (position.y + size.y);
+      tP3.z = depth;
+      tU3.x = uvPosition.x;
+      tU3.y = 1.0f - (uvPosition.y + uvSize.y);
 
-      mBuffer.position[mPositionIterator++] = tQ0;
-      mBuffer.position[mPositionIterator++] = tQ1;
-      mBuffer.position[mPositionIterator++] = tQ2;
-      mBuffer.position[mPositionIterator++] = tQ3;
+      mBuffer.position[mPositionIterator] = tP0;
+      mBuffer.uv[mPositionIterator++] = tU0;
+
+      mBuffer.position[mPositionIterator] = tP1;
+      mBuffer.uv[mPositionIterator++] = tU1;
+
+      mBuffer.position[mPositionIterator] = tP2;
+      mBuffer.uv[mPositionIterator++] = tU2;
+
+      mBuffer.position[mPositionIterator] = tP3;
+      mBuffer.uv[mPositionIterator++] = tU3;
 
       mBuffer.indexes[mIndexIterator++] = mIndex;
       mBuffer.indexes[mIndexIterator++] = mIndex + 1;

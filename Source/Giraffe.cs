@@ -10,7 +10,6 @@ public class Giraffe : MonoBehaviour
 
   private List<GiraffeLayer> mLayers;
 
-  private Material mMaterial;
   void Awake()
   {
     mLayers = new List<GiraffeLayer>(4);
@@ -25,11 +24,6 @@ public class Giraffe : MonoBehaviour
 
     transform.position = Vector3.zero;
     transform.rotation = Quaternion.identity;
-  }
-
-  void Start()
-  {
-    mMaterial = new Material(Shader.Find("Giraffe/Standard"));
   }
 
   public void AddLayer(GiraffeLayer layer)
@@ -64,7 +58,6 @@ public class Giraffe : MonoBehaviour
 
   void OnPostRender()
   {
-    mMaterial.SetPass(0);
     int count = mLayers.Count;
     for (int i = 0; i < count; i++)
     {
