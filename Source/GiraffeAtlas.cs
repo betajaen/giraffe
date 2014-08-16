@@ -1,5 +1,29 @@
 ﻿using System;
 using UnityEngine;
+using GiraffeInternal;
+
+namespace GiraffeInternal
+{
+
+  [Serializable]
+  public class GiraffaAtlasEditorSpriteImport
+  {
+    [SerializeField]
+    public String name;
+
+    [SerializeField]
+    public Texture2D texture;
+  }
+
+  [Serializable]
+  public class GiraffaAtlasEditorData
+  {
+    [SerializeField]
+    public GiraffaAtlasEditorSpriteImport sprites;
+
+  }
+
+}
 
 [Serializable]
 public class GiraffeSprite
@@ -29,6 +53,12 @@ public class GiraffeAtlas : ScriptableObject
   [SerializeField]
   public Texture2D texture;
 
+  [SerializeField]
+  public bool textureWritable;
+
+  [SerializeField]
+  private GiraffaAtlasEditorData mEditorData;
+
   [NonSerialized]
   private Material mMaterial;
 
@@ -46,6 +76,22 @@ public class GiraffeAtlas : ScriptableObject
     }
   }
 
+#if UNITY_EDITOR
+
+  public GiraffaAtlasEditorData editorData
+  {
+    get { return mEditorData; }
+  }
+
+  void _CreateEditorData()
+  {
+    if (editorData == null)
+    {
+      mEditorData = new GiraffaAtlasEditorData();
+    }
+  }
+
+#endif
 
 }
 

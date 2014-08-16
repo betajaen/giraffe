@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Name: Rectangles
   m_EditorClassIdentifier: 
   sprites: []
-  texture: {fileID: 2800000, guid: eb8f4b4cffe737146bee616e82583ecc, type: 3}
+  texture: {fileID: 2800000, guid: adac3c99cb59e6b4292f5feb792cb479, type: 3}
+  textureWritable: 0
+  mEditorData:
+    sprites:
+      name: 
+      texture: {fileID: 0}
