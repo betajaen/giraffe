@@ -1,28 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using GorillaInternal;
 using UnityEngine;
 using GiraffeInternal;
 
-namespace GiraffeInternal
+namespace GorillaInternal
 {
-
-  [Serializable]
-  public class GiraffaAtlasEditorSpriteImport
-  {
-    [SerializeField]
-    public String name;
-
-    [SerializeField]
-    public Texture2D texture;
-  }
-
-  [Serializable]
-  public class GiraffaAtlasEditorData
-  {
-    [SerializeField]
-    public GiraffaAtlasEditorSpriteImport sprites;
-
-  }
-
 }
 
 [Serializable]
@@ -47,20 +30,38 @@ public class GiraffeSprite
 [Serializable]
 public class GiraffeAtlas : ScriptableObject
 {
+
   [SerializeField]
-  public GiraffeSprite[] sprites;
+  public int atlasIdA;
+
+  [SerializeField]
+  public int atlasIdB;
+
+  [SerializeField]
+  public List<GiraffeSprite> sprites;
 
   [SerializeField]
   public Texture2D texture;
 
-  [SerializeField]
-  public bool textureWritable;
+  [NonSerialized]
+  public GiraffeImportData _importData;
+
+  [NonSerialized]
+  public int _importDataResolved;
 
   [SerializeField]
-  private GiraffaAtlasEditorData mEditorData;
+  private String mEditorData;
 
   [NonSerialized]
   private Material mMaterial;
+
+  void OnEnable()
+  {
+    if (sprites == null)
+    {
+      sprites = new List<GiraffeSprite>(4);
+    }
+  }
 
   public Material material
   {
@@ -75,23 +76,6 @@ public class GiraffeAtlas : ScriptableObject
       return mMaterial;
     }
   }
-
-#if UNITY_EDITOR
-
-  public GiraffaAtlasEditorData editorData
-  {
-    get { return mEditorData; }
-  }
-
-  void _CreateEditorData()
-  {
-    if (editorData == null)
-    {
-      mEditorData = new GiraffaAtlasEditorData();
-    }
-  }
-
-#endif
 
 }
 

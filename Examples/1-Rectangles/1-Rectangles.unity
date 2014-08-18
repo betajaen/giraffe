@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mZOrder: 0
-  mAtlas: {fileID: 11400000, guid: ad4286329d842564fae9ddd779f25490, type: 2}
+  mAtlas: {fileID: 0}
   mMesh: {fileID: 0}
 --- !u!1 &1745635041
 GameObject:
