@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 using Object = UnityEngine.Object;
 
 [CustomEditor(typeof(GiraffeAtlas))]
@@ -90,6 +91,7 @@ public class GiraffeAtlasEditor : Editor
     texImporter.alphaIsTransparency = true;
     texImporter.filterMode = textureAsset.filterMode;
     texImporter.wrapMode = textureAsset.wrapMode;
+    texImporter.isReadable = true;
 
     EditorUtility.SetDirty(atlas);
     EditorUtility.SetDirty(texImporter);
@@ -158,13 +160,23 @@ public class GiraffeAtlasEditor : Editor
       mSpriteMode = 1;
     }
     if (mSpriteMode == 2)
+    {
       GUI.color = Color.green;
+    }
     else
-      GUI.color = col;
+    {
+      if (mAtlas._importData != null && mAtlas._importData.atlasOutOfDate)
+        GUI.color = Color.yellow;
+      else
+        GUI.color = col;
+    }
+
+
     if (GUILayout.Button("Import"))
     {
       mSpriteMode = 2;
     }
+
     GUI.color = col;
     EditorGUILayout.EndHorizontal();
 
@@ -203,6 +215,14 @@ public class GiraffeAtlasEditor : Editor
     EditorGUILayout.EndScrollView();
   }
 
+  enum FriendlyPartType
+  {
+    Texture,
+    //   CommaSeperatedFile
+  }
+
+  private Vector2 mImportScroll;
+
   void InspectImport()
   {
     if (mAtlas._importDataResolved == 2)
@@ -232,11 +252,234 @@ public class GiraffeAtlasEditor : Editor
           EditorUtility.SetDirty(importData);
         }
       }
-      GUILayout.Label("Note: To stop the Import Data and any textures/files it references as part of the build, place them inside of the Resources folder.", EditorStyles.wordWrappedLabel);
+      GUILayout.Label("Note: To stop the Import Data and any textures/files it references as part of the build, place them outside of the Resources folder.", EditorStyles.wordWrappedLabel);
 
       GUILayout.EndVertical();
       return;
     }
+
+    bool changed = false;
+
+    GUILayout.BeginHorizontal();
+
+    Color col = GUI.color;
+
+    if (mAtlas._importData.atlasOutOfDate)
+    {
+      GUI.color = Color.yellow;
+    }
+
+    if (GUILayout.Button("Build", EditorStyles.miniButton, GUILayout.MinWidth(120)))
+    {
+      BuildAtlas();
+    }
+
+    GUI.color = col;
+
+    GUILayout.FlexibleSpace();
+    GUILayout.BeginHorizontal(GUILayout.MinWidth(120));
+    GUI.changed = false;
+
+    GUILayout.Label("Add", GUILayout.Width(25));
+    var v = (FriendlyPartType)EditorGUILayout.EnumPopup(FriendlyPartType.Texture);
+
+    if (GUI.changed)
+    {
+      switch (v)
+      {
+        case FriendlyPartType.Texture:
+        {
+          GiraffeAtlasImportDataPart part = new GiraffeAtlasImportDataPart();
+          part.type = GiraffeAtlasImportDataType.Texture2D;
+          mAtlas._importData.parts.Add(part);
+          changed = true;
+          break;
+        }
+        //        case FriendlyPartType.CommaSeperatedFile:
+        //        {
+        //          GiraffeAtlasImportDataPart part = new GiraffeAtlasImportDataPart();
+        //          part.type = GiraffeAtlasImportDataType.CSV;
+        //          mAtlas._importData.parts.Add(part);
+        //          changed = true;
+        //          break;
+        //        }
+      }
+    }
+
+    GUILayout.EndHorizontal();
+    GUILayout.EndHorizontal();
+
+    mImportScroll = GUILayout.BeginScrollView(mImportScroll);
+
+    foreach (var part in mAtlas._importData.parts)
+    {
+      GUILayout.BeginHorizontal();
+
+      if (GUILayout.Button("x", GUILayout.Width(25)))
+      {
+        mAtlas._importData.parts.Remove(part);
+        break;
+      }
+
+      switch (part.type)
+      {
+        case GiraffeAtlasImportDataType.Texture2D:
+        {
+          GUI.changed = false;
+          part.textureAsset = EditorGUILayout.ObjectField(part.textureAsset, typeof(Texture2D), false) as Texture2D;
+
+          if (GUI.changed)
+          {
+            Debug.Log("changed image");
+            changed = true;
+          }
+
+        }
+        break;
+        //        case GiraffeAtlasImportDataType.CSV:
+        //        {
+        //          GUILayout.BeginVertical();
+        //          GUI.changed = false;
+        //          part.textAsset = EditorGUILayout.ObjectField(part.textureAsset, typeof(TextAsset), false) as TextAsset;
+        //
+        //          if (GUI.changed)
+        //          {
+        //            Debug.Log("changed csv text");
+        //            changed = true;
+        //          }
+        //
+        //          GUI.changed = false;
+        //          part.textureAsset = EditorGUILayout.ObjectField(part.textureAsset, typeof(Texture2D), false) as Texture2D;
+        //
+        //          if (GUI.changed)
+        //          {
+        //            Debug.Log("changed csv image");
+        //            changed = true;
+        //          }
+        //          GUILayout.EndVertical();
+        //        }
+        //        break;
+      }
+
+      GUILayout.EndHorizontal();
+    }
+
+    GUILayout.EndScrollView();
+
+    if (changed)
+    {
+      mAtlas._importData.atlasOutOfDate = true;
+      EditorUtility.SetDirty(mAtlas._importData);
+      EditorUtility.SetDirty(mAtlas);
+    }
+
+  }
+
+  class TextureCoordSet
+  {
+    public struct PixelCoords
+    {
+      public String name;
+      public int x, y;
+      public int w, h;
+    }
+
+    public List<PixelCoords> coords;
+
+    public TextureCoordSet()
+    {
+      coords = new List<PixelCoords>(1);
+    }
+  }
+
+  void BuildAtlas()
+  {
+    mAtlas._importData.atlasOutOfDate = false;
+    EditorUtility.SetDirty(mAtlas._importData);
+    EditorUtility.SetDirty(mAtlas);
+
+    Dictionary<Texture2D, TextureCoordSet> textureCoords = new Dictionary<Texture2D, TextureCoordSet>(mAtlas._importData.parts.Count);
+    List<Texture2D> texturesToPack = new List<Texture2D>(mAtlas._importData.parts.Count);
+
+    foreach (var part in mAtlas._importData.parts)
+    {
+      if (part.textureAsset == null)
+        continue;
+
+      TextureCoordSet set = null;
+      if (textureCoords.TryGetValue(part.textureAsset, out set) == false)
+      {
+        set = new TextureCoordSet();
+        textureCoords.Add(part.textureAsset, set);
+      }
+
+      switch (part.type)
+      {
+        case GiraffeAtlasImportDataType.Texture2D:
+        {
+
+          if (texturesToPack.Contains(part.textureAsset) == false)
+          {
+            texturesToPack.Add(part.textureAsset);
+
+            var coord = new TextureCoordSet.PixelCoords()
+            {
+              x = 0,
+              y = 0,
+              w = part.textureAsset.width,
+              h = part.textureAsset.height,
+              name = part.textureAsset.name
+            };
+            set.coords.Add(coord);
+          }
+        }
+        break;
+      }
+    }
+
+    // Write texture
+    Texture2D tex = new Texture2D(128, 128);
+    var rects = tex.PackTextures(texturesToPack.ToArray(), 1);
+    tex.Apply(true, false);
+
+    int texWidth = tex.width;
+    int texHeight = tex.height;
+
+    Debug.Log(texWidth);
+    Debug.Log(texHeight);
+
+    byte[] bytes = tex.EncodeToPNG();
+    System.IO.FileStream fs = System.IO.File.Create(AssetDatabase.GetAssetPath(mAtlas.texture));
+    fs.Write(bytes, 0, bytes.Length);
+    fs.Close();
+
+    Object.DestroyImmediate(tex);
+
+    mAtlas.sprites.Clear();
+
+    for (int i = 0; i < rects.Length; i++)
+    {
+      TextureCoordSet set = textureCoords[texturesToPack[i]];
+      foreach (var coords in set.coords)
+      {
+        var sprite = new GiraffeSprite();
+        sprite.name = coords.name;
+        sprite.x0 = rects[i].xMin;
+        sprite.x1 = rects[i].xMax;
+        sprite.y0 = rects[i].yMin;
+        sprite.y1 = rects[i].yMax;
+        sprite.left = (int)(rects[i].xMin * texWidth);
+        sprite.top = (int)(rects[i].yMin * texHeight);
+        sprite.width = (int)(rects[i].width * texWidth);
+        sprite.height = (int)(rects[i].height * texHeight);
+        mAtlas.sprites.Add(sprite);
+      }
+    }
+
+    EditorUtility.SetDirty(mAtlas._importData);
+    EditorUtility.SetDirty(mAtlas);
+
+    AssetDatabase.Refresh();
   }
 
 }

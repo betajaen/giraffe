@@ -7,7 +7,7 @@ public enum GiraffeAtlasImportDataType
 {
   None,
   Texture2D,
-  CSV,
+  //CSV,
 }
 
 [Serializable]
@@ -25,11 +25,6 @@ public class GiraffeAtlasImportDataPart
 
 public class GiraffeImportData : ScriptableObject
 {
-  public static readonly string[] SourceTypeNames = new String[2]
-    {
-      "None",
-      "Textures"
-    };
 
   [SerializeField]
   public int atlasIdA;

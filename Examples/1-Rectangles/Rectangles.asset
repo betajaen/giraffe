@@ -11,8 +11,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b61d2f31eb2464690f587d64c6eae7, type: 3}
   m_Name: Rectangles
   m_EditorClassIdentifier: 
-  atlasIdA: 277627114
-  atlasIdB: 1983366172
-  sprites: []
-  texture: {fileID: 2800000, guid: 55735d40344321e498532e339ea12e54, type: 3}
+  atlasIdA: 1785038947
+  atlasIdB: 114376378
+  sprites:
+  - name: Box
+    left: 65
+    top: 0
+    width: 32
+    height: 32
+  - name: Box2
+    left: 0
+    top: 33
+    width: 32
+    height: 32
+  - name: Box3
+    left: 0
+    top: 66
+    width: 32
+    height: 32
+  - name: Box4
+    left: 0
+    top: 0
+    width: 64
+    height: 32
+  texture: {fileID: 2800000, guid: 5e4a88d1ca84d8c4394590cd99845a62, type: 3}
   mEditorData: 

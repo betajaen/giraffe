@@ -14,17 +14,29 @@ public class GiraffeSprite
   [SerializeField]
   public String name;
 
-  [SerializeField]
-  public int x0;
+  [NonSerialized]
+  public float x0;
+
+  [NonSerialized]
+  public float y0;
+
+  [NonSerialized]
+  public float x1;
+
+  [NonSerialized]
+  public float y1;
 
   [SerializeField]
-  public int y0;
+  public int left;
 
   [SerializeField]
-  public int x1;
+  public int top;
 
   [SerializeField]
-  public int y1;
+  public int width;
+
+  [SerializeField]
+  public int height;
 }
 
 [Serializable]
