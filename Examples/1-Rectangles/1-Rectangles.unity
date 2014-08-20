@@ -167,6 +167,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1666102585}
   - 114: {fileID: 1666102586}
+  - 114: {fileID: 1666102587}
   m_Layer: 0
   m_Name: Example
   m_TagString: Untagged
@@ -200,6 +201,17 @@ MonoBehaviour:
   mZOrder: 0
   mAtlas: {fileID: 11400000, guid: 004fd93ed291fa142b3db46ab1c96a4a, type: 2}
   mMesh: {fileID: 0}
+--- !u!114 &1666102587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1666102584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794638993a7ebcd4995f58e77c202afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1745635041
 GameObject:
   m_ObjectHideFlags: 0

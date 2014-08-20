@@ -116,4 +116,36 @@ public class GiraffeLayer : MonoBehaviour
     mLayer.Draw();
   }
 
+  public void Begin(int nbQuads)
+  {
+    mLayer.Begin(nbQuads);
+  }
+
+  public void Quad(int x, int y, String spriteName)
+  {
+    GiraffeSprite sprite = mAtlas.GetSprite(spriteName);
+    Quad(x, y, sprite.width, sprite.height, sprite);
+  }
+
+  public void Quad(int x, int y, int w, int h, String spriteName)
+  {
+    GiraffeSprite sprite = mAtlas.GetSprite(spriteName);
+    Quad(x, y, w, h, sprite);
+  }
+
+  public void Quad(int x, int y, GiraffeSprite sprite)
+  {
+    Quad(x, y, sprite.width, sprite.height, sprite);
+  }
+
+  public void Quad(int x, int y, int w, int h, GiraffeSprite sprite)
+  {
+    mLayer.Quad(x, y, w, h, sprite);
+  }
+
+  public void End()
+  {
+    mLayer.End();
+  }
+
 }

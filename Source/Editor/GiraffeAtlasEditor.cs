@@ -452,6 +452,7 @@ public class GiraffeAtlasEditor : Editor
     foreach (var s in sprites)
     {
       var sprite = new GiraffeSprite();
+      sprite.name = s.name;
       sprite.left = s.x;
       sprite.top = s.y;
       sprite.width = s.w;

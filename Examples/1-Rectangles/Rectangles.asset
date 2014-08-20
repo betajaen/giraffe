@@ -14,27 +14,27 @@ MonoBehaviour:
   atlasIdA: 1785038947
   atlasIdB: 114376378
   sprites:
-  - name: 
+  - name: Giraffe/White
     left: 116
     top: 4
     width: 4
     height: 4
-  - name: 
+  - name: Box
     left: 76
     top: 4
     width: 32
     height: 32
-  - name: 
+  - name: Box2
     left: 4
     top: 44
     width: 32
     height: 32
-  - name: 
+  - name: Box3
     left: 4
     top: 84
     width: 32
     height: 32
-  - name: 
+  - name: Box4
     left: 4
     top: 4
     width: 64

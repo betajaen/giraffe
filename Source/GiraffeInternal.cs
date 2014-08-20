@@ -51,6 +51,7 @@ namespace GiraffeInternal
     private MeshBuffer mBuffer;
     private Mesh mMesh;
     private Material mMaterial;
+    private float mInvTextureWidth, mInvTextureHeight;
     private int mEstimatedQuads;
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
@@ -60,6 +61,10 @@ namespace GiraffeInternal
     {
       mMesh = mesh;
       mMaterial = material;
+      Texture texture = mMaterial.mainTexture;
+      mInvTextureWidth = 1.0f / texture.width;
+      mInvTextureHeight = 1.0f / texture.height;
+
       mBuffer = new MeshBuffer(mMesh);
 
       // Texel
@@ -79,13 +84,6 @@ namespace GiraffeInternal
     public void Update()
     {
       mUpdateCount++;
-      BeginEstimation();
-      AddToEstimation(1);
-      EndEstimation();
-
-      Begin();
-      Quad(new Vector2(10.0f, 10.0f), new Vector2(32.0f, 32.0f), new Vector2(0.0f, 0.0f), new Vector2(1.0f, 1.0f));
-      End();
     }
 
     public void Draw()
@@ -95,29 +93,16 @@ namespace GiraffeInternal
       Graphics.DrawMeshNow(mMesh, new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f), Quaternion.identity);
     }
 
-    public void BeginEstimation()
-    {
-      mEstimatedQuads = 0;
-    }
-
-    public void AddToEstimation(int nbQuads)
-    {
-      mEstimatedQuads += nbQuads;
-    }
-
-    public void EndEstimation()
+    public void Begin(int nbQuads)
     {
       const int verticesPerQuad = 6;
       const int indexesPerQuad = 6;
 
-      int nbVertices = verticesPerQuad * mEstimatedQuads;
-      int nbIndexes = indexesPerQuad * mEstimatedQuads;
+      int nbVertices = verticesPerQuad * nbQuads;
+      int nbIndexes = indexesPerQuad * nbQuads;
 
       mBuffer.Reserve(nbVertices, nbIndexes);
-    }
 
-    public void Begin()
-    {
       mPositionIterator = 0;
       mIndexIterator = 0;
       mIndex = 0;
@@ -126,8 +111,10 @@ namespace GiraffeInternal
     private static Vector3 tP0, tP1, tP2, tP3;
     private static Vector2 tU0, tU1, tU2, tU3;
 
-    public void Quad(Vector2 position, Vector2 size, Vector2 uvPosition, Vector2 uvSize)
+
+    public void Quad(int x, int y, int w, int h, GiraffeSprite sprite)
     {
+
 
       // 0---1
       // |\  |
@@ -137,29 +124,29 @@ namespace GiraffeInternal
       const float depth = 0.0f;
       const float yScale = -1.0f;
 
-      tP0.x = position.x;
-      tP0.y = yScale * position.y;
+      tP0.x = x;
+      tP0.y = yScale * y;
       tP0.z = depth;
-      tU0.x = uvPosition.x;
-      tU0.y = 1.0f - uvPosition.y;
+      tU0.x = sprite.x0;
+      tU0.y = sprite.y1;
 
-      tP1.x = position.x + size.x;
-      tP1.y = yScale * position.y;
+      tP1.x = x + w;
+      tP1.y = yScale * y;
       tP1.z = depth;
-      tU1.x = uvPosition.x + uvSize.x;
-      tU1.y = 1.0f - uvPosition.y;
+      tU1.x = sprite.x1;
+      tU1.y = sprite.y1;
 
-      tP2.x = position.x + size.x;
-      tP2.y = yScale * (position.y + size.y);
+      tP2.x = x + w;
+      tP2.y = yScale * (y + h);
       tP2.z = depth;
-      tU2.x = uvPosition.x + uvSize.x;
-      tU2.y = 1.0f - (uvPosition.y + uvSize.y);
+      tU2.x = sprite.x1;
+      tU2.y = sprite.y0;
 
-      tP3.x = position.x;
-      tP3.y = yScale * (position.y + size.y);
+      tP3.x = x;
+      tP3.y = yScale * (y + h);
       tP3.z = depth;
-      tU3.x = uvPosition.x;
-      tU3.y = 1.0f - (uvPosition.y + uvSize.y);
+      tU3.x = sprite.x0;
+      tU3.y = sprite.y0;
 
       mBuffer.position[mPositionIterator] = tP0;
       mBuffer.uv[mPositionIterator++] = tU0;

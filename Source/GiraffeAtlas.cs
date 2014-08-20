@@ -41,16 +41,14 @@ public class GiraffeSprite
     refreshNeeded = true;
   }
 
-  public void Refresh(int textureWidth, int textureHeight)
+  public void Refresh(float invTexWidth, float invTexHeight)
   {
     refreshNeeded = false;
-
-    float invTexWidth = 1.0f / (float)textureWidth;
-    float invTexHeight = 1.0f / (float)textureHeight;
     x0 = left * invTexWidth;
     x1 = (left + width) * invTexWidth;
-    y0 = top * invTexHeight;
-    y1 = (top + height) * invTexHeight;
+    y0 = (top * invTexHeight);
+    y1 = ((top + height) * invTexHeight);
+    Debug.Log(String.Format("refresh {0} {1} -- {2} {3} {4} {5}", invTexWidth, invTexHeight, x0, x1, y0, y1));
   }
 
 }
@@ -92,6 +90,7 @@ public class GiraffeAtlas : ScriptableObject
     {
       sprites = new List<GiraffeSprite>(4);
     }
+
   }
 
   public Material material
@@ -119,7 +118,10 @@ public class GiraffeAtlas : ScriptableObject
     }
     if (sprite.refreshNeeded)
     {
-      sprite.Refresh(texture.width, texture.height);
+
+      float invTexWidth = 1.0f / mMaterial.mainTexture.width;
+      float invTexHeight = 1.0f / mMaterial.mainTexture.height;
+      sprite.Refresh(invTexWidth, invTexHeight);
     }
     return sprite;
   }
