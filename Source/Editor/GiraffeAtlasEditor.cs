@@ -309,6 +309,25 @@ public class GiraffeAtlasEditor : Editor
     GUILayout.EndHorizontal();
     GUILayout.EndHorizontal();
 
+
+    GUILayout.BeginVertical();
+
+    GUI.changed = false;
+    mAtlas._importData.padding = EditorGUILayout.IntSlider("Padding", mAtlas._importData.padding, 0, 8);
+
+    if (GUI.changed)
+      changed = true;
+
+    GUI.changed = false;
+    mAtlas._importData.border = EditorGUILayout.IntSlider("Border", mAtlas._importData.border, 0, 32);
+
+    if (GUI.changed)
+      changed = true;
+
+
+    GUILayout.EndVertical();
+
+
     mImportScroll = GUILayout.BeginScrollView(mImportScroll);
 
     foreach (var part in mAtlas._importData.parts)
@@ -392,88 +411,53 @@ public class GiraffeAtlasEditor : Editor
     }
   }
 
+  const int kWhiteTexSize = 4;
+
   void BuildAtlas()
   {
     mAtlas._importData.atlasOutOfDate = false;
-    EditorUtility.SetDirty(mAtlas._importData);
-    EditorUtility.SetDirty(mAtlas);
 
-    Dictionary<Texture2D, TextureCoordSet> textureCoords = new Dictionary<Texture2D, TextureCoordSet>(mAtlas._importData.parts.Count);
-    List<Texture2D> texturesToPack = new List<Texture2D>(mAtlas._importData.parts.Count);
+    // Add white texture.
+    var whiteTex = new Texture2D(kWhiteTexSize, kWhiteTexSize, TextureFormat.ARGB32, false);
+    whiteTex.name = "Giraffe/White";
+    Color32[] col = new Color32[kWhiteTexSize * kWhiteTexSize];
+    for (int i = 0; i < kWhiteTexSize * kWhiteTexSize; i++)
+      col[i] = new Color32(255, 255, 255, 255);
+    whiteTex.SetPixels32(col);
+    whiteTex.Apply(true, false);
 
-    foreach (var part in mAtlas._importData.parts)
+    GiraffeAtlasBuilder builder = new GiraffeAtlasBuilder();
+    builder.Begin(mAtlas.texture, mAtlas._importData.border, mAtlas._importData.padding);
+    builder.Add(whiteTex.name, whiteTex, 0, 0, kWhiteTexSize, kWhiteTexSize);
+
+    foreach (var p in mAtlas._importData.parts)
     {
-      if (part.textureAsset == null)
-        continue;
-
-      TextureCoordSet set = null;
-      if (textureCoords.TryGetValue(part.textureAsset, out set) == false)
+      switch (p.type)
       {
-        set = new TextureCoordSet();
-        textureCoords.Add(part.textureAsset, set);
-      }
-
-      switch (part.type)
-      {
+        case GiraffeAtlasImportDataType.None:
+        break;
         case GiraffeAtlasImportDataType.Texture2D:
         {
-
-          if (texturesToPack.Contains(part.textureAsset) == false)
-          {
-            texturesToPack.Add(part.textureAsset);
-
-            var coord = new TextureCoordSet.PixelCoords()
-            {
-              x = 0,
-              y = 0,
-              w = part.textureAsset.width,
-              h = part.textureAsset.height,
-              name = part.textureAsset.name
-            };
-            set.coords.Add(coord);
-          }
+          builder.Add(p.textureAsset.name, p.textureAsset, 0, 0, p.textureAsset.width, p.textureAsset.height);
         }
         break;
       }
     }
 
-    // Write texture
-    Texture2D tex = new Texture2D(128, 128);
-    var rects = tex.PackTextures(texturesToPack.ToArray(), 1);
-    tex.Apply(true, false);
+    var sprites = builder.End();
 
-    int texWidth = tex.width;
-    int texHeight = tex.height;
-
-    Debug.Log(texWidth);
-    Debug.Log(texHeight);
-
-    byte[] bytes = tex.EncodeToPNG();
-    System.IO.FileStream fs = System.IO.File.Create(AssetDatabase.GetAssetPath(mAtlas.texture));
-    fs.Write(bytes, 0, bytes.Length);
-    fs.Close();
-
-    Object.DestroyImmediate(tex);
+    Object.DestroyImmediate(whiteTex);
 
     mAtlas.sprites.Clear();
-
-    for (int i = 0; i < rects.Length; i++)
+    foreach (var s in sprites)
     {
-      TextureCoordSet set = textureCoords[texturesToPack[i]];
-      foreach (var coords in set.coords)
-      {
-        var sprite = new GiraffeSprite();
-        sprite.name = coords.name;
-        sprite.x0 = rects[i].xMin;
-        sprite.x1 = rects[i].xMax;
-        sprite.y0 = rects[i].yMin;
-        sprite.y1 = rects[i].yMax;
-        sprite.left = (int)(rects[i].xMin * texWidth);
-        sprite.top = (int)(rects[i].yMin * texHeight);
-        sprite.width = (int)(rects[i].width * texWidth);
-        sprite.height = (int)(rects[i].height * texHeight);
-        mAtlas.sprites.Add(sprite);
-      }
+      var sprite = new GiraffeSprite();
+      sprite.left = s.x;
+      sprite.top = s.y;
+      sprite.width = s.w;
+      sprite.height = s.h;
+      sprite.refreshNeeded = true;
+      mAtlas.sprites.Add(sprite);
     }
 
     EditorUtility.SetDirty(mAtlas._importData);

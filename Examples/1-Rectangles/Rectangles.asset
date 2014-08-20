@@ -14,24 +14,29 @@ MonoBehaviour:
   atlasIdA: 1785038947
   atlasIdB: 114376378
   sprites:
-  - name: Box
-    left: 65
-    top: 0
+  - name: 
+    left: 116
+    top: 4
+    width: 4
+    height: 4
+  - name: 
+    left: 76
+    top: 4
     width: 32
     height: 32
-  - name: Box2
-    left: 0
-    top: 33
+  - name: 
+    left: 4
+    top: 44
     width: 32
     height: 32
-  - name: Box3
-    left: 0
-    top: 66
+  - name: 
+    left: 4
+    top: 84
     width: 32
     height: 32
-  - name: Box4
-    left: 0
-    top: 0
+  - name: 
+    left: 4
+    top: 4
     width: 64
     height: 32
   texture: {fileID: 2800000, guid: 5e4a88d1ca84d8c4394590cd99845a62, type: 3}

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GorillaInternal;
 using UnityEngine;
-using GiraffeInternal;
 
-namespace GorillaInternal
-{
-}
 
 [Serializable]
 public class GiraffeSprite
@@ -37,6 +32,27 @@ public class GiraffeSprite
 
   [SerializeField]
   public int height;
+
+  [NonSerialized]
+  public bool refreshNeeded;
+
+  public GiraffeSprite()
+  {
+    refreshNeeded = true;
+  }
+
+  public void Refresh(int textureWidth, int textureHeight)
+  {
+    refreshNeeded = false;
+
+    float invTexWidth = 1.0f / (float)textureWidth;
+    float invTexHeight = 1.0f / (float)textureHeight;
+    x0 = left * invTexWidth;
+    x1 = (left + width) * invTexWidth;
+    y0 = top * invTexHeight;
+    y1 = (top + height) * invTexHeight;
+  }
+
 }
 
 [Serializable]
@@ -51,6 +67,9 @@ public class GiraffeAtlas : ScriptableObject
 
   [SerializeField]
   public List<GiraffeSprite> sprites;
+
+  [NonSerialized]
+  public GiraffeSprite whiteSprite;
 
   [SerializeField]
   public Texture2D texture;
@@ -89,5 +108,33 @@ public class GiraffeAtlas : ScriptableObject
     }
   }
 
+  public GiraffeSprite GetSprite(String name)
+  {
+    GiraffeSprite sprite = FindSprite(name);
+    if (sprite == null)
+    {
+      if (whiteSprite == null)
+        whiteSprite = FindSprite("Giraffe/White");
+      sprite = whiteSprite;
+    }
+    if (sprite.refreshNeeded)
+    {
+      sprite.Refresh(texture.width, texture.height);
+    }
+    return sprite;
+  }
+
+  private GiraffeSprite FindSprite(String name)
+  {
+    int spriteCount = sprites.Count;
+    for (int i = 0; i < spriteCount; i++)
+    {
+      if (sprites[i].name == name)
+        return sprites[i];
+    }
+    return null;
+  }
+
 }
+
 

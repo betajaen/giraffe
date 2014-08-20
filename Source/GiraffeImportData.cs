@@ -38,6 +38,12 @@ public class GiraffeImportData : ScriptableObject
   [SerializeField]
   public bool atlasOutOfDate;
 
+  [SerializeField]
+  public int border = 2;
+
+  [SerializeField]
+  public int padding = 0;
+
   [NonSerialized]
   public GiraffeAtlas _atlas;
 
