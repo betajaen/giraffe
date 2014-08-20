@@ -1,4 +1,4 @@
 giraffe
 =======
 
-Minimal HTML-like 2D framework for Unity
+Minimal 2D framework for Unity
