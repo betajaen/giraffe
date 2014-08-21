@@ -118,4 +118,4 @@ http://www.newgrounds.com/art/view/hyptosis/tile-art-batch-1
 Last Question - Why is it called Giraffe?
 -----------------------------------------
 
-Why not?
+Why not? It's also pronounced 'PEN-GWIN'.
