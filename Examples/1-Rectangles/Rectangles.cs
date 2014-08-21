@@ -28,7 +28,7 @@ public class Rectangles : MonoBehaviour
       int x = UnityEngine.Random.Range(0, Screen.width);
       int y = UnityEngine.Random.Range(0, Screen.height);
       int b = UnityEngine.Random.Range(0, mBoxes.Length);
-      mLayer.Quad(x, y, mBoxes[b]);
+      mLayer.Add(x, y, mBoxes[b]);
     }
 
     mLayer.End();

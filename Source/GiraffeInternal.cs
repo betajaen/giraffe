@@ -112,7 +112,7 @@ namespace GiraffeInternal
     private static Vector2 tU0, tU1, tU2, tU3;
 
 
-    public void Quad(int x, int y, int w, int h, GiraffeSprite sprite)
+    public void Add(int x, int y, int w, int h, GiraffeSprite sprite)
     {
 
 

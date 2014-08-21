@@ -32,7 +32,7 @@ public class Tilesets : MonoBehaviour
     for (int i = 0; i < area; i++)
     {
 
-      mLayer.Quad(screenOriginX + x * tileWidth, screenOriginY + y * tileHeight, mAtlas.sprites[map[i]]);
+      mLayer.Add(screenOriginX + x * tileWidth, screenOriginY + y * tileHeight, mAtlas.sprites[map[i]]);
 
       x++;
       if (x >= mapWidth)
