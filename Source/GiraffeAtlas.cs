@@ -48,7 +48,6 @@ public class GiraffeSprite
     x1 = (left + width) * invTexWidth;
     y0 = (top * invTexHeight);
     y1 = ((top + height) * invTexHeight);
-    Debug.Log(String.Format("refresh {0} {1} -- {2} {3} {4} {5}", invTexWidth, invTexHeight, x0, x1, y0, y1));
   }
 
 }

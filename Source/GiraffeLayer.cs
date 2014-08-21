@@ -22,6 +22,7 @@ public class GiraffeLayer : MonoBehaviour
 
   void Awake()
   {
+    Matrix4x4 m;
     mApplicationIsQuitting = false;
     mDirty = false;
     mTransform = GetComponent<Transform>();
@@ -142,6 +143,11 @@ public class GiraffeLayer : MonoBehaviour
   public void Add(int x, int y, int w, int h, GiraffeSprite sprite)
   {
     mLayer.Add(x, y, w, h, sprite);
+  }
+
+  public void Add(Matrix2D transform, GiraffeSprite sprite)
+  {
+    mLayer.Add(transform, sprite);
   }
 
   public void End()

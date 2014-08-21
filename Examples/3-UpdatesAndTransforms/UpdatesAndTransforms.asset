@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b61d2f31eb2464690f587d64c6eae7, type: 3}
+  m_Name: UpdatesAndTransforms
+  m_EditorClassIdentifier: 
+  atlasIdA: 808786689
+  atlasIdB: 187631692
+  sprites:
+  - name: Box
+    left: 8
+    top: 8
+    width: 32
+    height: 32
+  - name: Box1
+    left: 60
+    top: 8
+    width: 32
+    height: 32
+  texture: {fileID: 2800000, guid: f268d8c8ec7bdb64887d69bdec2ead41, type: 3}
+  mEditorData: 

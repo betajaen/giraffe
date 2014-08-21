@@ -106,6 +106,13 @@ namespace GiraffeInternal
       mPositionIterator = 0;
       mIndexIterator = 0;
       mIndex = 0;
+
+      const float depth = 0.0f;
+      tP0.z = depth;
+      tP1.z = depth;
+      tP2.z = depth;
+      tP3.z = depth;
+
     }
 
     private static Vector3 tP0, tP1, tP2, tP3;
@@ -121,30 +128,80 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      const float depth = 0.0f;
       const float yScale = -1.0f;
 
       tP0.x = x;
       tP0.y = yScale * y;
-      tP0.z = depth;
       tU0.x = sprite.x0;
       tU0.y = sprite.y1;
 
       tP1.x = x + w;
       tP1.y = yScale * y;
-      tP1.z = depth;
       tU1.x = sprite.x1;
       tU1.y = sprite.y1;
 
       tP2.x = x + w;
       tP2.y = yScale * (y + h);
-      tP2.z = depth;
       tU2.x = sprite.x1;
       tU2.y = sprite.y0;
 
       tP3.x = x;
       tP3.y = yScale * (y + h);
-      tP3.z = depth;
+      tU3.x = sprite.x0;
+      tU3.y = sprite.y0;
+
+      mBuffer.position[mPositionIterator] = tP0;
+      mBuffer.uv[mPositionIterator++] = tU0;
+
+      mBuffer.position[mPositionIterator] = tP1;
+      mBuffer.uv[mPositionIterator++] = tU1;
+
+      mBuffer.position[mPositionIterator] = tP2;
+      mBuffer.uv[mPositionIterator++] = tU2;
+
+      mBuffer.position[mPositionIterator] = tP3;
+      mBuffer.uv[mPositionIterator++] = tU3;
+
+      mBuffer.indexes[mIndexIterator++] = mIndex;
+      mBuffer.indexes[mIndexIterator++] = mIndex + 1;
+      mBuffer.indexes[mIndexIterator++] = mIndex + 2;
+
+      mBuffer.indexes[mIndexIterator++] = mIndex;
+      mBuffer.indexes[mIndexIterator++] = mIndex + 2;
+      mBuffer.indexes[mIndexIterator++] = mIndex + 3;
+      mIndex += 4;
+
+    }
+
+    public void Add(Matrix2D transform, GiraffeSprite sprite)
+    {
+
+
+      // 0---1
+      // |\  |
+      // | \ |
+      // 3--\2
+
+      const float depth = 0.0f;
+      const float yScale = -1.0f;
+
+      transform.Transform(-0.5f, -0.5f, ref tP0.x, ref tP0.y);
+      tP0.y *= yScale;
+      tU0.x = sprite.x0;
+      tU0.y = sprite.y1;
+
+      transform.Transform(0.5f, -0.5f, ref tP1.x, ref tP1.y);
+      tP1.y *= yScale;
+      tU1.x = sprite.x1;
+      tU1.y = sprite.y1;
+
+      transform.Transform(0.5f, 0.5f, ref tP2.x, ref tP2.y);
+      tP2.y *= yScale;
+      tU2.x = sprite.x1;
+      tU2.y = sprite.y0;
+
+      transform.Transform(-0.5f, 0.5f, ref tP3.x, ref tP3.y);
+      tP3.y *= yScale;
       tU3.x = sprite.x0;
       tU3.y = sprite.y0;
 
