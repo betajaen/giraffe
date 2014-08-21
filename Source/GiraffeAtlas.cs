@@ -113,7 +113,18 @@ public class GiraffeAtlas : ScriptableObject
     if (sprite == null)
     {
       if (whiteSprite == null)
+      {
         whiteSprite = FindSprite("Giraffe/White");
+        if (whiteSprite == null)
+        {
+          whiteSprite = new GiraffeSprite()
+          {
+            width = 1,
+            height = 1,
+            refreshNeeded = true
+          };
+        }
+      }
       sprite = whiteSprite;
     }
     if (sprite.refreshNeeded)
@@ -135,6 +146,16 @@ public class GiraffeAtlas : ScriptableObject
         return sprites[i];
     }
     return null;
+  }
+
+  public void RefreshSprites()
+  {
+    foreach (var sprite in sprites)
+    {
+      float invTexWidth = 1.0f / mMaterial.mainTexture.width;
+      float invTexHeight = 1.0f / mMaterial.mainTexture.height;
+      sprite.Refresh(invTexWidth, invTexHeight);
+    }
   }
 
 }

@@ -10,11 +10,40 @@ class GiraffeAtlasBuilder
   private int mPadding;
   private int mBorder;
 
-  class SpriteInput
+  public struct Quad
+  {
+    // x, y, w, h are relative to the original image.
+    // originX, originY is relative to x, y
+    public int x, y, w, h;
+    public int id;
+    public String name;
+  }
+
+  public class SpriteInput
   {
     public String name;
-    public int x, y, w, h;
     public Texture2D texture;
+    public List<Quad> quads;
+
+    public SpriteInput()
+    {
+      quads = new List<Quad>(1);
+    }
+
+    public void Add(int x, int y, int w, int h)
+    {
+      Quad quad = new Quad()
+      {
+        x = x,
+        y = y,
+        w = w,
+        h = h,
+        id = quads.Count,
+        name = String.Format("{0}/{1}", name, quads.Count)
+      };
+      quads.Add(quad);
+    }
+
   }
 
   class SpriteProcessed
@@ -23,14 +52,6 @@ class GiraffeAtlasBuilder
     public Texture2D image;
     public bool isModified;
     public int border;
-
-    public struct Quad
-    {
-      // x, y, w, h are relative to the original image.
-      // originX, originY is relative to x, y
-      public int x, y, w, h;
-      public String name;
-    }
 
     public List<Quad> quads;
 
@@ -57,6 +78,7 @@ class GiraffeAtlasBuilder
   private List<SpriteInput> mInputs;
   private List<SpriteProcessed> mProcessed;
   private List<SpriteOutput> mOutputs;
+
   private Texture2D[] mTexturesToPack;
 
   private Texture2D mOutputImage;
@@ -78,18 +100,27 @@ class GiraffeAtlasBuilder
     mOutputImage = target;
   }
 
-  public void Add(String name, Texture2D texture, int x, int y, int w, int h)
+  public SpriteInput Add(String name, Texture2D texture, bool includeWholeTextureAsQuad = true)
   {
     SpriteInput input = new SpriteInput
     {
       name = name,
-      texture = texture,
-      x = x,
-      y = y,
-      w = w,
-      h = h
+      texture = texture
     };
+    if (includeWholeTextureAsQuad)
+    {
+      input.quads.Add(new Quad
+      {
+        x = 0,
+        y = 0,
+        w = texture.width,
+        h = texture.height,
+        id = 0,
+        name = name
+      });
+    }
     mInputs.Add(input);
+    return input;
   }
 
   public List<SpriteOutput> End()
@@ -127,13 +158,11 @@ class GiraffeAtlasBuilder
         mProcessed.Add(processed);
       }
 
-      SpriteProcessed.Quad quad = new SpriteProcessed.Quad();
-      quad.x = input.x;
-      quad.y = input.y;
-      quad.w = input.w;
-      quad.h = input.h;
-      quad.name = input.name;
-      processed.quads.Add(quad);
+      foreach (var q in input.quads)
+      {
+        processed.quads.Add(q);
+      }
+
     }
   }
 
@@ -213,7 +242,6 @@ class GiraffeAtlasBuilder
     {
       mTexturesToPack[i] = mProcessed[i].image;
     }
-
 
     Texture2D texture = new Texture2D(4, 4);
     Rect[] textureRectangles = texture.PackTextures(mTexturesToPack, padding);

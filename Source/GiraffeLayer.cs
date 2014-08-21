@@ -39,6 +39,7 @@ public class GiraffeLayer : MonoBehaviour
 
     mMesh = new Mesh();
     mLayer = new Layer(mMesh, mAtlas.material);
+    mAtlas.RefreshSprites();
   }
 
   void OnApplicationQuit()

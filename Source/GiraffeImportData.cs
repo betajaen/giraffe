@@ -7,7 +7,7 @@ public enum GiraffeAtlasImportDataType
 {
   None,
   Texture2D,
-  //CSV,
+  Tileset,
 }
 
 [Serializable]
@@ -21,6 +21,13 @@ public class GiraffeAtlasImportDataPart
 
   [SerializeField]
   public Texture2D textureAsset;
+
+  [SerializeField]
+  public int size = 32;
+
+  [SerializeField]
+  public int count = 1;
+
 }
 
 public class GiraffeImportData : ScriptableObject
@@ -43,6 +50,9 @@ public class GiraffeImportData : ScriptableObject
 
   [SerializeField]
   public int padding = 0;
+
+  [SerializeField]
+  public bool generateWhiteTexture = true;
 
   [NonSerialized]
   public GiraffeAtlas _atlas;
