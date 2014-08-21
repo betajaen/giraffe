@@ -113,3 +113,9 @@ Artwork
 Some of the artwork was created by Hyptosis:
 
 http://www.newgrounds.com/art/view/hyptosis/tile-art-batch-1
+
+
+Last Question - Why it it called Giraffe?
+-----------------------------------------
+
+Why not?
