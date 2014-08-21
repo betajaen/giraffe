@@ -27,7 +27,7 @@ It's very efficient in the sense it's a single mesh per layer, single pass of a 
 What do I do?
 -----------------------
 
-Essentially, Giraffe is organised into layers, sprites are drawn in a layer. You can have as many sprites in a layer as you like (within reason of memory and Unity), a mesh is assigned per layer. A Texture Atlas is used to store the sprites into a single image, it's more efficent this way - A layer will use one Atlas.
+Essentially, Giraffe is organised into layers, sprites are drawn in a layer. You can have as many sprites in a layer as you like (within reason of memory and Unity), a mesh is assigned per layer. A Texture Atlas is used to store the sprites into a single image, it's more efficient this way - A layer will use one Atlas.
 
 In the Editor, there will be a root GameObject containing the Giraffe MonoBehaviour, this is the main Giraffe singleton MonoBehaviour responsible for drawing. For each layer, the Giraffe GameObject will have a sub-GameObject with a GiraffeLayer MonoBehaviour attached to it. 
 
@@ -43,7 +43,7 @@ When you want to show things on the screen, you tell the layer how many sprites 
 Just call Begin/Add/End as many times or combinations as you need to.
   
 
-Alright, what is it licenced under. Can I use it in my millon dollar game?
+Alright, what is it licenced under. Can I use it in my million dollar game?
 --------------------------------------------------------------------------
 
 Giraffe Copyright (c) 2014 Robin Southern
