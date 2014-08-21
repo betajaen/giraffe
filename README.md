@@ -106,6 +106,15 @@ Tilesets shows of the Grid based Tileset importer for the Atlas, and showing tha
 * Loading a map created by Tiled, via a simple importer
 * Showing that map on the screen
 
+## [3 - Updates and Transforms](https://github.com/betajaen/giraffe/tree/master/Examples/3-UpdatesAndTransforms)
+
+![Updates and Transforms](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/3-UpdatesAndTransforms/Example.png)
+
+This is a demonstration  of updating the layer each frame, and rotating and scaling the sprite using the Matrix2D struct, it shows:
+
+* Frame-by-frame updating
+* Using the TRS (Translate-Rotate-Scale) function of Matrix2D to generate a matrix for a rotatable sprite.
+
 
 Artwork
 -------
