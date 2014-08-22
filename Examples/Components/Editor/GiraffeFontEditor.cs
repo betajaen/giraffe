@@ -162,7 +162,7 @@ public class GiraffeFontEditor : Editor
   {
     None,
     Grid,
-    AngelCodeBitmapFontGenerator
+    // AngelCodeBitmapFontGenerator
   }
 
   private ImporterType mImporterType;
@@ -251,7 +251,7 @@ public class GiraffeFontEditor : Editor
         {
           if (GUILayout.Button(String.Format("Build using {0}", mFont.spriteName)))
           {
-
+            BuildGrid();
           }
         }
         EditorGUI.indentLevel--;
@@ -290,16 +290,14 @@ public class GiraffeFontEditor : Editor
             Rect t = new Rect(spriteRect.x + mPreviewCoords[i].x, spriteRect.y + mPreviewCoords[i].y, mPreviewCoords[i].width, mPreviewCoords[i].height);
             GUI.DrawTextureWithTexCoords(t, mFont.atlas.texture, mPreviewRects[i], true);
           }
-
-
         }
 
         EditorGUI.indentLevel--;
         GUILayout.EndVertical();
       }
       break;
-      case ImporterType.AngelCodeBitmapFontGenerator:
-      break;
+      //      case ImporterType.AngelCodeBitmapFontGenerator:
+      //      break;
     }
 
     if (mImporterRefreshPreview)
@@ -397,6 +395,41 @@ public class GiraffeFontEditor : Editor
     }
 
 
+  }
+
+  void BuildGrid()
+  {
+    int glyphCount = mImporterString.Length;
+    mFont.glyphs = new GiraffeFontGlyph[glyphCount];
+
+    GiraffeSprite sprite = mFont.atlas.GetSprite(mFont.spriteName);
+    int charsPerLine = sprite.width / mImporterCharWidth;
+
+    for (int i = 0; i < glyphCount; i++)
+    {
+      int cx = i % charsPerLine;
+      int cy = i / charsPerLine;
+
+      GiraffeFontGlyph glyph = new GiraffeFontGlyph()
+      {
+        character = mImporterString[i],
+        width = mImporterCharWidth,
+        height = mImporterCharHeight,
+        x = cx * mImporterCharWidth,
+        y = sprite.height - ((cy + 1) * mImporterCharHeight),
+        xAdvance = mImporterCharWidth,
+        xOffset = 0,
+        yOffset = 0
+      };
+
+      mFont.glyphs[i] = glyph;
+    }
+
+    mFont.lineHeight = mImporterCharHeight;
+    mFont.spaceAdvance = mImporterCharWidth;
+
+    EditorUtility.SetDirty(mFont);
+    mImporterType = ImporterType.None;
   }
 
 }

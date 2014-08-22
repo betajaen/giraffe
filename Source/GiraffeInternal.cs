@@ -28,7 +28,6 @@ namespace GiraffeInternal
     {
       if (vertexCount != nbVertices)
       {
-        Debug.Log("Resizing verts");
         nbVertices = vertexCount;
         position = new Vector3[nbVertices];
         uv = new Vector2[nbVertices];
@@ -36,7 +35,6 @@ namespace GiraffeInternal
 
       if (indexCount != nbIndexes)
       {
-        Debug.Log("Resizing indexes");
         nbIndexes = indexCount;
         indexes = new int[nbIndexes];
       }
