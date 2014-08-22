@@ -129,62 +129,72 @@ public class GiraffeAtlasEditor : Editor
   }
 
   private GiraffeAtlas mAtlas;
-  private int mSpriteMode;
+  private int mMode;
 
   void OnEnable()
   {
     mAtlas = (GiraffeAtlas)this.target;
+    mAtlas.RefreshSprites();
     TryResolveEditorData(mAtlas);
-    mSpriteMode = 0;
+    mMode = 0;
   }
 
   public override void OnInspectorGUI()
   {
-    mAtlas.texture = EditorGUILayout.ObjectField("Texture", mAtlas.texture, typeof(Texture2D)) as Texture2D;
 
-    Color col = GUI.color;
+    GUILayout.BeginVertical();
+    GUILayout.Label("Giraffe Atlas", EditorStyles.boldLabel);
+
+    GUILayout.Space(4);
+    GUILayout.EndVertical();
 
     EditorGUILayout.BeginHorizontal();
-    if (mSpriteMode == 0)
-      GUI.color = Color.green;
-    if (GUILayout.Button("General"))
+
+    Color col = GUI.backgroundColor;
+
+    if (mMode != 0)
     {
-      mSpriteMode = 0;
+      GUI.backgroundColor = col * 0.75f;
     }
-    if (mSpriteMode == 1)
-      GUI.color = Color.green;
+
+    if (GUILayout.Button("Atlas", EditorStyles.miniButtonLeft))
+    {
+      mMode = 0;
+    }
+
+    if (mMode != 1)
+    {
+      GUI.backgroundColor = col * 0.75f;
+    }
     else
-      GUI.color = col;
-    if (GUILayout.Button("Sprites"))
+      GUI.backgroundColor = col;
+
+    if (GUILayout.Button("Sprites", EditorStyles.miniButtonMid))
     {
-      mSpriteMode = 1;
+      mMode = 1;
     }
-    if (mSpriteMode == 2)
+
+    if (mMode != 2)
     {
-      GUI.color = Color.green;
+      GUI.backgroundColor = col * 0.75f;
     }
     else
+      GUI.backgroundColor = col;
+
+    if (GUILayout.Button("Importer", EditorStyles.miniButtonRight))
     {
-      if (mAtlas._importData != null && mAtlas._importData.atlasOutOfDate)
-        GUI.color = Color.yellow;
-      else
-        GUI.color = col;
+      mMode = 2;
     }
 
+    GUI.backgroundColor = col;
 
-    if (GUILayout.Button("Import"))
-    {
-      mSpriteMode = 2;
-    }
-
-    GUI.color = col;
     EditorGUILayout.EndHorizontal();
 
-    if (mSpriteMode == 0)
-      InspectGeneral();
-    else if (mSpriteMode == 1)
+    if (mMode == 0)
+      InspectAtlas();
+    else if (mMode == 1)
       InspectEdit();
-    else if (mSpriteMode == 2)
+    else if (mMode == 2)
       InspectImport();
 
   }
@@ -192,13 +202,63 @@ public class GiraffeAtlasEditor : Editor
   private Vector2 mInspectSpritesScroll;
   static private GUIStyle msSpriteThumbStyle;
 
-  void InspectGeneral()
+  void InspectAtlas()
   {
-    // 
+    bool changed = false;
+    GUILayout.BeginVertical();
+    GUILayout.Label("Texture", EditorStyles.boldLabel);
+    EditorGUI.indentLevel++;
+
+    GUI.changed = false;
+    mAtlas.texture = EditorGUILayout.ObjectField("Texture", mAtlas.texture, typeof(Texture2D), false) as Texture2D;
+
+    if (mAtlas.texture != null)
+    {
+      EditorGUILayout.LabelField("Size", String.Format("{0} x {1} px", mAtlas.texture.width, mAtlas.texture.height));
+    }
+
+    if (GUI.changed)
+      changed = true;
+
+
+    EditorGUI.indentLevel--;
+    GUILayout.EndVertical();
+
+    GUILayout.BeginVertical();
+    GUILayout.Label("Material", EditorStyles.boldLabel);
+    EditorGUI.indentLevel++;
+
+    GUI.changed = false;
+    mAtlas.useCustomMaterial = EditorGUILayout.Toggle("Custom Material", mAtlas.useCustomMaterial);
+    if (GUI.changed)
+      changed = true;
+
+    if (mAtlas.useCustomMaterial)
+    {
+      EditorGUI.indentLevel++;
+
+      mAtlas.customMaterial = EditorGUILayout.ObjectField("Material", mAtlas.customMaterial, typeof(Material), false) as Material;
+
+      EditorGUILayout.LabelField(String.Empty, "Note: Texture will be assigned to Material.mainTexture when the Atlas is enabled", EditorStyles.wordWrappedMiniLabel);
+      EditorGUI.indentLevel--;
+    }
+    EditorGUI.indentLevel--;
+    GUILayout.EndVertical();
+
+
+    if (changed)
+    {
+      EditorUtility.SetDirty(mAtlas);
+    }
   }
+
+  private String selectedSpriteName = String.Empty;
 
   void InspectEdit()
   {
+
+    bool changed = false;
+
     if (msSpriteThumbStyle == null)
     {
       msSpriteThumbStyle = new GUIStyle(GUI.skin.button);
@@ -209,10 +269,74 @@ public class GiraffeAtlasEditor : Editor
 
     foreach (var sprite in mAtlas.sprites)
     {
-      GUILayout.Button(sprite.name);
+      bool isSelected = selectedSpriteName == sprite.name;
+
+      GUI.changed = false;
+
+      bool select = GUILayout.Toggle(isSelected, sprite.name, EditorStyles.foldout);
+      if (GUI.changed)
+      {
+        if (isSelected)
+        {
+          selectedSpriteName = String.Empty;
+        }
+        else
+        {
+          selectedSpriteName = sprite.name;
+        }
+      }
+
+      if (isSelected)
+      {
+        const int kPadding = 8;
+
+        EditorGUI.indentLevel++;
+
+        GUILayout.BeginVertical();
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.BeginHorizontal(EditorStyles.objectFieldThumb, GUILayout.Width(sprite.width + kPadding * 2), GUILayout.Height(sprite.height + kPadding * 2));
+        Rect baseRect = GUILayoutUtility.GetRect(sprite.width + kPadding * 2, sprite.height + kPadding * 2);
+
+        GUILayout.EndHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        Rect spriteRect = new Rect(baseRect.x + kPadding, baseRect.y + kPadding, sprite.width, sprite.height);
+
+        GUI.DrawTextureWithTexCoords(spriteRect, mAtlas.texture, new Rect(sprite.x0, sprite.y0, sprite.x1 - sprite.x0, sprite.y1 - sprite.y0), true);
+
+        EditorGUILayout.LabelField("Size", String.Format("{0}, {1} px", sprite.width, sprite.height));
+
+        GUI.changed = false;
+
+        sprite.scale = EditorGUILayout.IntSlider("Scale", sprite.scale, 1, 16);
+
+        if (GUI.changed)
+          changed = true;
+
+
+        GUILayout.BeginHorizontal();
+        GUI.changed = false;
+
+        sprite.offsetX = EditorGUILayout.IntField("Offset", sprite.offsetX);
+        sprite.offsetY = EditorGUILayout.IntField(sprite.offsetY);
+
+        GUILayout.EndHorizontal();
+
+        GUILayout.EndVertical();
+
+        EditorGUI.indentLevel--;
+      }
+
     }
 
     EditorGUILayout.EndScrollView();
+
+    if (changed)
+    {
+      EditorUtility.SetDirty(mAtlas);
+    }
   }
 
   enum FriendlyPartType
@@ -225,8 +349,13 @@ public class GiraffeAtlasEditor : Editor
 
   void InspectImport()
   {
+
     if (mAtlas._importDataResolved == 2)
     {
+      GUILayout.BeginVertical();
+      GUILayout.Label("Importer File", EditorStyles.boldLabel);
+      GUILayout.EndVertical();
+
       GUILayout.BeginVertical(EditorStyles.textArea);
       GUILayout.Label("An Giraffe Import Data file must be created before using, this is used by the editor to keep track of external resources to build the texture atlas.", EditorStyles.wordWrappedLabel);
       if (GUILayout.Button("Create"))
@@ -256,6 +385,12 @@ public class GiraffeAtlasEditor : Editor
 
       GUILayout.EndVertical();
       return;
+    }
+    else
+    {
+      GUILayout.BeginVertical();
+      GUILayout.Label("Import tool", EditorStyles.boldLabel);
+      GUILayout.EndVertical();
     }
 
     bool changed = false;
@@ -525,6 +660,8 @@ public class GiraffeAtlasEditor : Editor
 
     EditorUtility.SetDirty(mAtlas._importData);
     EditorUtility.SetDirty(mAtlas);
+
+    mAtlas.RefreshSprites();
 
     AssetDatabase.Refresh();
   }

@@ -36,6 +36,15 @@ public class GiraffeSprite
   [NonSerialized]
   public bool refreshNeeded;
 
+  [SerializeField]
+  public int scale = 1;
+
+  [SerializeField]
+  public int offsetX = 0;
+
+  [SerializeField]
+  public int offsetY = 0;
+
   public GiraffeSprite()
   {
     refreshNeeded = true;
@@ -83,6 +92,12 @@ public class GiraffeAtlas : ScriptableObject
   [NonSerialized]
   private Material mMaterial;
 
+  [SerializeField]
+  public bool useCustomMaterial;
+
+  [SerializeField]
+  public Material customMaterial;
+
   void OnEnable()
   {
     if (sprites == null)
@@ -98,8 +113,15 @@ public class GiraffeAtlas : ScriptableObject
     {
       if (mMaterial == null)
       {
-        Shader shader = Shader.Find("Giraffe/Standard");
-        mMaterial = new Material(shader);
+        if (customMaterial)
+        {
+          mMaterial = customMaterial;
+        }
+        else
+        {
+          Shader shader = Shader.Find("Giraffe/Standard");
+          mMaterial = new Material(shader);
+        }
         mMaterial.mainTexture = texture;
       }
       return mMaterial;
@@ -129,8 +151,8 @@ public class GiraffeAtlas : ScriptableObject
     if (sprite.refreshNeeded)
     {
 
-      float invTexWidth = 1.0f / mMaterial.mainTexture.width;
-      float invTexHeight = 1.0f / mMaterial.mainTexture.height;
+      float invTexWidth = 1.0f / texture.width;
+      float invTexHeight = 1.0f / texture.height;
       sprite.Refresh(invTexWidth, invTexHeight);
     }
     return sprite;
@@ -151,8 +173,8 @@ public class GiraffeAtlas : ScriptableObject
   {
     foreach (var sprite in sprites)
     {
-      float invTexWidth = 1.0f / mMaterial.mainTexture.width;
-      float invTexHeight = 1.0f / mMaterial.mainTexture.height;
+      float invTexWidth = 1.0f / texture.width;
+      float invTexHeight = 1.0f / texture.height;
       sprite.Refresh(invTexWidth, invTexHeight);
     }
   }

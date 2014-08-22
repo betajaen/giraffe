@@ -19,10 +19,18 @@ MonoBehaviour:
     top: 8
     width: 32
     height: 32
+    scale: 16
+    offsetX: 0
+    offsetY: 0
   - name: Box1
     left: 60
     top: 8
     width: 32
     height: 32
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   texture: {fileID: 2800000, guid: f268d8c8ec7bdb64887d69bdec2ead41, type: 3}
   mEditorData: 
+  useCustomMaterial: 0
+  customMaterial: {fileID: 0}
