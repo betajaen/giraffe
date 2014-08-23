@@ -71,10 +71,10 @@ Future
 
 I consider the core part of Giraffe complete, additional features should be added in as forms of examples with reusable components, but I would like to add - in no particular order or commitment;
 
-* Text support 
+* ~~Text support~~
 * BMFont font importer
 * More sprite examples; animation, 2d physics with sprites, etc.
-* Rotation and flipping effects
+* ~~Rotation~~ and flipping effects
 * A primitive GUI
 * Non-grid based tileset importer
 * Unity sprite atlas importer
