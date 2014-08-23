@@ -19,25 +19,42 @@ MonoBehaviour:
     top: 4
     width: 4
     height: 4
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   - name: Box
     left: 76
     top: 4
     width: 32
     height: 32
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   - name: Box2
     left: 4
     top: 44
     width: 32
     height: 32
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   - name: Box3
     left: 4
     top: 84
     width: 32
     height: 32
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   - name: Box4
     left: 4
     top: 4
     width: 64
     height: 32
+    scale: 1
+    offsetX: 0
+    offsetY: 0
   texture: {fileID: 2800000, guid: 5e4a88d1ca84d8c4394590cd99845a62, type: 3}
   mEditorData: 
+  useCustomMaterial: 0
+  customMaterial: {fileID: 0}

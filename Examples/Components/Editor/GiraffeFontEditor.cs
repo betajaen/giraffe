@@ -43,7 +43,7 @@ public class GiraffeFontEditor : Editor
   void OnEnable()
   {
     mFont = (GiraffeFont)this.target;
-    mMode = 1;
+    mMode = 0;
     MakeSpriteNames();
 
   }
