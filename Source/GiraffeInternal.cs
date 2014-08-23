@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEditor.Sprites;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 namespace GiraffeInternal
 {
@@ -14,33 +11,49 @@ namespace GiraffeInternal
     public int nbVertices;
     public int nbIndexes;
 
-    public MeshBuffer(Mesh mesh)
+    public int bufferChanges;
+
+    public MeshBuffer()
     {
-      mMesh = mesh;
+      nbVertices = 0;
+      nbIndexes = 0;
+      bufferChanges = 0;
     }
 
     public void Delete()
     {
       position = null;
+      uv = null;
+      indexes = null;
     }
 
-    public void Reserve(int vertexCount, int indexCount)
+    public bool Reserve(int newNbVertices, int newNbIndexes)
     {
-      if (vertexCount != nbVertices)
+      bool clear = newNbVertices != nbVertices;
+
+      if (newNbVertices > nbVertices || newNbIndexes > nbIndexes)
       {
-        nbVertices = vertexCount;
-        position = new Vector3[nbVertices];
-        uv = new Vector2[nbVertices];
+        ReserveForce(newNbVertices, newNbIndexes);
+      }
+      else
+      {
+        for (int i = newNbIndexes; i < nbIndexes; i++)
+          indexes[i] = 0;
       }
 
-      if (indexCount != nbIndexes)
-      {
-        nbIndexes = indexCount;
-        indexes = new int[nbIndexes];
-      }
+      return clear;
     }
 
-    private Mesh mMesh;
+    public void ReserveForce(int newNbVertices, int newNbIndexes)
+    {
+      nbVertices = newNbVertices;
+      position = new Vector3[nbVertices];
+      uv = new Vector2[nbVertices];
+
+      nbIndexes = newNbIndexes;
+      indexes = new int[nbIndexes];
+    }
+
   }
 
   class Layer
@@ -53,6 +66,7 @@ namespace GiraffeInternal
     private int mEstimatedQuads;
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
+    private bool mClearThisTime;
     private Vector3 mTexelOffset;
 
     public Layer(Mesh mesh, Material material)
@@ -63,7 +77,7 @@ namespace GiraffeInternal
       mInvTextureWidth = 1.0f / texture.width;
       mInvTextureHeight = 1.0f / texture.height;
 
-      mBuffer = new MeshBuffer(mMesh);
+      mBuffer = new MeshBuffer();
 
       // Texel
       if (Application.platform == RuntimePlatform.WindowsPlayer ||
@@ -73,6 +87,11 @@ namespace GiraffeInternal
         mTexelOffset = new Vector3(0.5f, -0.5f, 0.0f);
       }
 
+      const float depth = 0.0f;
+      tP0.z = depth;
+      tP1.z = depth;
+      tP2.z = depth;
+      tP3.z = depth;
     }
 
     void Delete()
@@ -93,23 +112,19 @@ namespace GiraffeInternal
 
     public void Begin(int nbQuads)
     {
-      const int verticesPerQuad = 6;
+      const int verticesPerQuad = 4;
       const int indexesPerQuad = 6;
 
       int nbVertices = verticesPerQuad * nbQuads;
       int nbIndexes = indexesPerQuad * nbQuads;
 
-      mBuffer.Reserve(nbVertices, nbIndexes);
+      int changes = mBuffer.bufferChanges;
+      mClearThisTime = mBuffer.Reserve(nbVertices, nbIndexes);
+
 
       mPositionIterator = 0;
       mIndexIterator = 0;
       mIndex = 0;
-
-      const float depth = 0.0f;
-      tP0.z = depth;
-      tP1.z = depth;
-      tP2.z = depth;
-      tP3.z = depth;
 
     }
 
@@ -180,7 +195,6 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      const float depth = 0.0f;
       const float yScale = -1.0f;
 
       transform.Transform(-0.5f, -0.5f, ref tP0.x, ref tP0.y);
@@ -228,9 +242,17 @@ namespace GiraffeInternal
 
     public void End()
     {
+
       mMesh.MarkDynamic();
+
+      if (mClearThisTime)
+      {
+        mMesh.Clear();
+      }
+
       mMesh.vertices = mBuffer.position;
       mMesh.uv = mBuffer.uv;
+
       mMesh.SetIndices(mBuffer.indexes, MeshTopology.Triangles, 0);
     }
 
