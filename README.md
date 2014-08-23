@@ -115,6 +115,18 @@ This is a demonstration  of updating the layer each frame, and rotating and scal
 * Frame-by-frame updating
 * Using the TRS (Translate-Rotate-Scale) function of Matrix2D to generate a matrix for a rotatable sprite.
 
+## [4 - Text Rendering](https://github.com/betajaen/giraffe/tree/master/Examples/4-TextRendering)
+
+![Text Rendering](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/4-TextRendering/Example.png)
+
+This is a demonstration of rendering text, by using the optional GorillaFont component. In this example, it uses a bitmap font to draw text on the screen. In particular it demonstrates;
+
+* GiraffeFont usage
+* Getting quad estimation of text, then drawing it to a layer
+* Switching colours
+* Using the 'Giraffe/White' sprite for drawing solids of colour.
+* Frame-by-frame updating
+
 
 Artwork
 -------
