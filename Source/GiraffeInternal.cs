@@ -67,7 +67,9 @@ namespace GiraffeInternal
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
     private bool mClearThisTime;
-    private Vector3 mTexelOffset;
+    private Vector3 mTransformPosition;
+    private Vector3 mTransformScale;
+    private Matrix4x4 mTransform;
 
     public Layer(Mesh mesh, Material material)
     {
@@ -76,26 +78,18 @@ namespace GiraffeInternal
       Texture texture = mMaterial.mainTexture;
       mInvTextureWidth = 1.0f / texture.width;
       mInvTextureHeight = 1.0f / texture.height;
+      mTransformScale = new Vector3(1.0f, -1.0f, 1.0f);
 
       mBuffer = new MeshBuffer();
-
-      // Texel
-      if (Application.platform == RuntimePlatform.WindowsPlayer ||
-          Application.platform == RuntimePlatform.WindowsWebPlayer ||
-          Application.platform == RuntimePlatform.WindowsEditor)
-      {
-        mTexelOffset = new Vector3(0.5f, -0.5f, 0.0f);
-      }
 
       const float depth = 0.0f;
       tP0.z = depth;
       tP1.z = depth;
       tP2.z = depth;
       tP3.z = depth;
-    }
 
-    void Delete()
-    {
+      mTransformPosition = new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f);
+      RefreshTransform();
     }
 
     public void Update()
@@ -103,11 +97,25 @@ namespace GiraffeInternal
       mUpdateCount++;
     }
 
+    public void SetScale(int scale)
+    {
+      int s = Mathf.Abs(scale);
+      mTransformScale.x = s;
+      mTransformScale.y = -s;
+      mTransformScale.z = 1.0f;
+      RefreshTransform();
+    }
+
+    void RefreshTransform()
+    {
+      mTransform = Matrix4x4.TRS(mTransformPosition, Quaternion.identity, mTransformScale);
+    }
+
     public void Draw()
     {
       mDrawCount++;
       mMaterial.SetPass(0);
-      Graphics.DrawMeshNow(mMesh, new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f), Quaternion.identity);
+      Graphics.DrawMeshNow(mMesh, mTransform);
     }
 
     public void Begin(int nbQuads)
@@ -141,25 +149,23 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      const float yScale = -1.0f;
-
       tP0.x = x;
-      tP0.y = yScale * y;
+      tP0.y = y;
       tU0.x = sprite.x0;
       tU0.y = sprite.y1;
 
-      tP1.x = x + w;
-      tP1.y = yScale * y;
+      tP1.x = (x + w);
+      tP1.y = y;
       tU1.x = sprite.x1;
       tU1.y = sprite.y1;
 
-      tP2.x = x + w;
-      tP2.y = yScale * (y + h);
+      tP2.x = (x + w);
+      tP2.y = (y + h);
       tU2.x = sprite.x1;
       tU2.y = sprite.y0;
 
       tP3.x = x;
-      tP3.y = yScale * (y + h);
+      tP3.y = (y + h);
       tU3.x = sprite.x0;
       tU3.y = sprite.y0;
 
@@ -195,25 +201,19 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      const float yScale = -1.0f;
-
       transform.Transform(-0.5f, -0.5f, ref tP0.x, ref tP0.y);
-      tP0.y *= yScale;
       tU0.x = sprite.x0;
       tU0.y = sprite.y1;
 
       transform.Transform(0.5f, -0.5f, ref tP1.x, ref tP1.y);
-      tP1.y *= yScale;
       tU1.x = sprite.x1;
       tU1.y = sprite.y1;
 
       transform.Transform(0.5f, 0.5f, ref tP2.x, ref tP2.y);
-      tP2.y *= yScale;
       tU2.x = sprite.x1;
       tU2.y = sprite.y0;
 
       transform.Transform(-0.5f, 0.5f, ref tP3.x, ref tP3.y);
-      tP3.y *= yScale;
       tU3.x = sprite.x0;
       tU3.y = sprite.y0;
 

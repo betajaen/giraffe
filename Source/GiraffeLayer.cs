@@ -18,6 +18,9 @@ public class GiraffeLayer : MonoBehaviour
   [SerializeField]
   private GiraffeAtlas mAtlas;
 
+  [SerializeField]
+  private int mScale = 1;
+
   public Mesh mMesh;
 
   void Awake()
@@ -41,6 +44,10 @@ public class GiraffeLayer : MonoBehaviour
     mMesh = new Mesh();
     mLayer = new Layer(mMesh, mAtlas.material);
     mAtlas.RefreshSprites();
+
+    if (mScale <= 0)
+      mScale = 1;
+
   }
 
   void OnApplicationQuit()
@@ -104,6 +111,24 @@ public class GiraffeLayer : MonoBehaviour
       if (Application.isPlaying && mApplicationIsQuitting == false)
       {
         mGiraffe.DrawOrderChanged();
+      }
+    }
+  }
+
+  public int scale
+  {
+    get
+    {
+      return mScale;
+    }
+    set
+    {
+      if (mScale == value)
+        return;
+      mScale = value;
+      if (Application.isPlaying && mApplicationIsQuitting == false)
+      {
+        mLayer.SetScale(mScale);
       }
     }
   }

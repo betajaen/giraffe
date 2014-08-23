@@ -14,8 +14,11 @@ public class TextRendering : MonoBehaviour
   void Start()
   {
     mLayer = GetComponent<GiraffeLayer>();
+  }
 
-    String text = @"Hello World!";
+  void FixedUpdate()
+  {
+    String text = String.Format("{0:N1}", Time.time);
 
     int textQuadLength = victoriaBold.Estimate(text);
 
@@ -24,7 +27,6 @@ public class TextRendering : MonoBehaviour
     victoriaBold.AddTo(mLayer, 10, 10, text);
 
     mLayer.End();
-
   }
 
 }
