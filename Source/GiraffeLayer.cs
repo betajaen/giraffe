@@ -42,7 +42,7 @@ public class GiraffeLayer : MonoBehaviour
     }
 
     mMesh = new Mesh();
-    mLayer = new Layer(mMesh, mAtlas.material);
+    mLayer = new Layer(mMesh, mAtlas.material, mScale);
     mAtlas.RefreshSprites();
 
     if (mScale <= 0)
@@ -146,6 +146,16 @@ public class GiraffeLayer : MonoBehaviour
   public void Begin(int nbQuads)
   {
     mLayer.Begin(nbQuads);
+  }
+
+  public void SetColour(Color32 colour)
+  {
+    mLayer.colour = colour;
+  }
+
+  public void SetColour(byte r, byte g, byte b, byte a)
+  {
+    mLayer.colour = new Color32(r, g, b, a);
   }
 
   public void Add(int x, int y, String spriteName)

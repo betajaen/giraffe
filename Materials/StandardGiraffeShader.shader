@@ -3,7 +3,6 @@
 	Properties
 	{
 		_MainTex ("Sprite Texture", 2D) = "white" {}
-		_Color ("Main Color", Color) = (1,1,1,1)
 	}
 
 	SubShader
@@ -32,18 +31,19 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			fixed4 _Color;
 
 			struct appdata_t
 			{
 				float4 vertex   : POSITION;
 				float2 texcoord : TEXCOORD0;
+				float4 colour : COLOR;
 			};
 
 			struct v2f
 			{
 				float4 vertex        : POSITION;
 				float2 texcoord      : TEXCOORD0;
+				float4 colour        : COLOR;
 			};
 
 			v2f vert(appdata_t IN)
@@ -51,6 +51,7 @@
 				v2f OUT;
 				OUT.vertex = mul(UNITY_MATRIX_MVP, IN.vertex);
 				OUT.texcoord = TRANSFORM_TEX(IN.texcoord, _MainTex);
+				OUT.colour = IN.colour;
 
 				// Snapping params
 				float hpcX = _ScreenParams.x * 0.5;
@@ -74,7 +75,7 @@
 
 			fixed4 frag(v2f IN) : COLOR
 			{
-				return tex2D( _MainTex, IN.texcoord) * _Color;
+				return tex2D( _MainTex, IN.texcoord) * IN.colour;
 			}
 		ENDCG
 		}

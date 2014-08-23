@@ -14,16 +14,16 @@ MonoBehaviour:
   atlasIdA: 1768388834
   atlasIdB: 958511942
   sprites:
-  - name: MrLucky
-    left: 0
+  - name: Giraffe/White
+    left: 252
     top: 0
-    width: 256
-    height: 256
+    width: 4
+    height: 4
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: VictoriaBold
-    left: 256
+    left: 0
     top: 0
     width: 252
     height: 36

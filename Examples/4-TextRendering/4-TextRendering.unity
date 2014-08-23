@@ -123,7 +123,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .256634027, g: .208747819, b: .286764681, a: .0196078438}
+  m_BackGroundColor: {r: .525490224, g: .478431374, b: .870588243, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mZOrder: 0
   mAtlas: {fileID: 11400000, guid: cca8706f6eaed4742a9c44298cfea3b7, type: 2}
-  mScale: 1
+  mScale: 2
   mMesh: {fileID: 0}
 --- !u!114 &1666102587
 MonoBehaviour:
@@ -214,6 +214,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoriaBold: {fileID: 11400000, guid: 7ac0ea78a03a2a545b7bf7612b926fdf, type: 2}
+  originX: 0
+  originY: 0
+  sizeX: 0
+  sizeY: 0
+  line1: '     **** COMMODORE 64 BASIC V2 ****'
+  line2: READY.
+  backgroundColour:
+    serializedVersion: 2
+    rgba: 4289346120
+  textColour:
+    serializedVersion: 2
+    rgba: 4292770438
 --- !u!1 &1745635041
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +262,7 @@ Camera:
   m_GameObject: {fileID: 1745635041}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2

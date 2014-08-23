@@ -7,6 +7,8 @@ namespace GiraffeInternal
   {
     public Vector3[] position;
     public Vector2[] uv;
+    public Color32[] colours;
+
     public int[] indexes;
     public int nbVertices;
     public int nbIndexes;
@@ -49,6 +51,7 @@ namespace GiraffeInternal
       nbVertices = newNbVertices;
       position = new Vector3[nbVertices];
       uv = new Vector2[nbVertices];
+      colours = new Color32[nbVertices];
 
       nbIndexes = newNbIndexes;
       indexes = new int[nbIndexes];
@@ -71,7 +74,9 @@ namespace GiraffeInternal
     private Vector3 mTransformScale;
     private Matrix4x4 mTransform;
 
-    public Layer(Mesh mesh, Material material)
+    public Color32 colour = new Color32(255, 255, 255, 255);
+
+    public Layer(Mesh mesh, Material material, int scale)
     {
       mMesh = mesh;
       mMaterial = material;
@@ -89,7 +94,7 @@ namespace GiraffeInternal
       tP3.z = depth;
 
       mTransformPosition = new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f);
-      RefreshTransform();
+      SetScale(scale);
     }
 
     public void Update()
@@ -140,6 +145,7 @@ namespace GiraffeInternal
     private static Vector2 tU0, tU1, tU2, tU3;
 
 
+
     public void Add(int x, int y, int w, int h, GiraffeSprite sprite)
     {
 
@@ -170,16 +176,20 @@ namespace GiraffeInternal
       tU3.y = sprite.y0;
 
       mBuffer.position[mPositionIterator] = tP0;
-      mBuffer.uv[mPositionIterator++] = tU0;
+      mBuffer.uv[mPositionIterator] = tU0;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP1;
-      mBuffer.uv[mPositionIterator++] = tU1;
+      mBuffer.uv[mPositionIterator] = tU1;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP2;
-      mBuffer.uv[mPositionIterator++] = tU2;
+      mBuffer.uv[mPositionIterator] = tU2;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP3;
-      mBuffer.uv[mPositionIterator++] = tU3;
+      mBuffer.uv[mPositionIterator] = tU3;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.indexes[mIndexIterator++] = mIndex;
       mBuffer.indexes[mIndexIterator++] = mIndex + 1;
@@ -218,16 +228,20 @@ namespace GiraffeInternal
       tU3.y = sprite.y0;
 
       mBuffer.position[mPositionIterator] = tP0;
-      mBuffer.uv[mPositionIterator++] = tU0;
+      mBuffer.uv[mPositionIterator] = tU0;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP1;
-      mBuffer.uv[mPositionIterator++] = tU1;
+      mBuffer.uv[mPositionIterator] = tU1;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP2;
-      mBuffer.uv[mPositionIterator++] = tU2;
+      mBuffer.uv[mPositionIterator] = tU2;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.position[mPositionIterator] = tP3;
-      mBuffer.uv[mPositionIterator++] = tU3;
+      mBuffer.uv[mPositionIterator] = tU3;
+      mBuffer.colours[mPositionIterator++] = colour;
 
       mBuffer.indexes[mIndexIterator++] = mIndex;
       mBuffer.indexes[mIndexIterator++] = mIndex + 1;
@@ -252,6 +266,7 @@ namespace GiraffeInternal
 
       mMesh.vertices = mBuffer.position;
       mMesh.uv = mBuffer.uv;
+      mMesh.colors32 = mBuffer.colours;
 
       mMesh.SetIndices(mBuffer.indexes, MeshTopology.Triangles, 0);
     }

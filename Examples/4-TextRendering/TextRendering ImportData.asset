@@ -16,15 +16,10 @@ MonoBehaviour:
   parts:
   - type: 1
     textAsset: {fileID: 0}
-    textureAsset: {fileID: 2800000, guid: a0c71780ccc295d46a423d90326154b0, type: 3}
-    size: 32
-    count: 1
-  - type: 1
-    textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: f37cf74b6e8d97e41aea448f32dd9352, type: 3}
     size: 32
     count: 1
   atlasOutOfDate: 0
   border: 0
   padding: 0
-  generateWhiteTexture: 0
+  generateWhiteTexture: 1

@@ -54,8 +54,6 @@ public class GiraffeAtlasEditor : Editor
     atlas.atlasIdA = rng.Next();
     atlas.atlasIdB = rng.Next();
 
-    //GiraffeAtlasEditorData editorData = ScriptableObject.CreateInstance<GiraffeAtlasEditorData>();
-
     string path = AssetDatabase.GetAssetPath(Selection.activeObject);
     if (path == "")
     {
@@ -95,34 +93,6 @@ public class GiraffeAtlasEditor : Editor
 
     EditorUtility.SetDirty(atlas);
     EditorUtility.SetDirty(texImporter);
-
-    EditorUtility.FocusProjectWindow();
-    Selection.activeObject = atlas;
-  }
-
-  // [MenuItem("Assets/Create/Giraffe Atlas Source (Temp)")]
-  static void CreateAtlasData()
-  {
-    GiraffeImportData atlas = ScriptableObject.CreateInstance<GiraffeImportData>();
-    //GiraffeAtlasEditorData editorData = ScriptableObject.CreateInstance<GiraffeAtlasEditorData>();
-
-    string path = AssetDatabase.GetAssetPath(Selection.activeObject);
-    if (path == "")
-    {
-      path = "Assets";
-    }
-    else if (Path.GetExtension(path) != "")
-    {
-      path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
-    }
-
-    string atlasPath = AssetDatabase.GenerateUniqueAssetPath(path + "/New Giraffe Atlas Source.asset");
-
-    AssetDatabase.CreateAsset(atlas, atlasPath);
-    AssetDatabase.SaveAssets();
-    AssetDatabase.Refresh();
-
-    EditorUtility.SetDirty(atlas);
 
     EditorUtility.FocusProjectWindow();
     Selection.activeObject = atlas;
