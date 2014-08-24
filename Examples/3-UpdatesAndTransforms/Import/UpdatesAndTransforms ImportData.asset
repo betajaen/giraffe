@@ -17,12 +17,14 @@ MonoBehaviour:
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: cd9a0f5eaa1dd2c4bab6d297247be8d4, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: cf65b5f3ce32770498760a08e38e68fb, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   atlasOutOfDate: 0
   border: 8

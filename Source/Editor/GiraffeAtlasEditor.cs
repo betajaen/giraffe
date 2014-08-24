@@ -312,7 +312,8 @@ public class GiraffeAtlasEditor : Editor
   enum FriendlyPartType
   {
     Texture,
-    Tileset
+    SquareTileSheet,
+    RectangularTileSheet
   }
 
   private Vector2 mImportScroll;
@@ -400,10 +401,18 @@ public class GiraffeAtlasEditor : Editor
           changed = true;
           break;
         }
-        case FriendlyPartType.Tileset:
+        case FriendlyPartType.SquareTileSheet:
         {
           GiraffeAtlasImportDataPart part = new GiraffeAtlasImportDataPart();
-          part.type = GiraffeAtlasImportDataType.Tileset;
+          part.type = GiraffeAtlasImportDataType.TileSheetSquare;
+          mAtlas._importData.parts.Add(part);
+          changed = true;
+          break;
+        }
+        case FriendlyPartType.RectangularTileSheet:
+        {
+          GiraffeAtlasImportDataPart part = new GiraffeAtlasImportDataPart();
+          part.type = GiraffeAtlasImportDataType.TilesheetRectangular;
           mAtlas._importData.parts.Add(part);
           changed = true;
           break;
@@ -471,7 +480,7 @@ public class GiraffeAtlasEditor : Editor
 
         }
         break;
-        case GiraffeAtlasImportDataType.Tileset:
+        case GiraffeAtlasImportDataType.TileSheetSquare:
         {
           GUILayout.BeginVertical();
           GUI.changed = false;
@@ -485,7 +494,7 @@ public class GiraffeAtlasEditor : Editor
           }
 
           GUI.changed = false;
-          part.size = EditorGUILayout.IntSlider("Tile size", part.size, 2, 512);
+          part.height = part.width = EditorGUILayout.IntSlider("Tile size", part.width, 2, 512);
 
           if (GUI.changed)
           {
@@ -502,7 +511,56 @@ public class GiraffeAtlasEditor : Editor
             }
             else
             {
-              part.count = (part.textureAsset.width * part.textureAsset.height) / (part.size * part.size);
+              part.count = (part.textureAsset.width * part.textureAsset.height) / (part.width * part.height);
+            }
+          }
+
+          EditorGUILayout.LabelField("Count", part.count.ToString());
+          GUILayout.EndVertical();
+        }
+        break;
+
+        case GiraffeAtlasImportDataType.TilesheetRectangular:
+        {
+          GUILayout.BeginVertical();
+          GUI.changed = false;
+          bool refreshCount = false;
+          part.textureAsset = EditorGUILayout.ObjectField(part.textureAsset, typeof(Texture2D), false) as Texture2D;
+
+          if (GUI.changed)
+          {
+            refreshCount = true;
+            changed = true;
+          }
+
+          GUI.changed = false;
+          part.width = EditorGUILayout.IntSlider("Tile width", part.width, 2, 512);
+
+          if (GUI.changed)
+          {
+            refreshCount = true;
+            changed = true;
+          }
+
+          GUI.changed = false;
+          part.height = EditorGUILayout.IntSlider("Tile height", part.height, 2, 512);
+
+          if (GUI.changed)
+          {
+            refreshCount = true;
+            changed = true;
+          }
+
+          if (refreshCount)
+          {
+            refreshCount = false;
+            if (part.textureAsset == null)
+            {
+              part.count = 0;
+            }
+            else
+            {
+              part.count = (part.textureAsset.width * part.textureAsset.height) / (part.width * part.height);
             }
           }
 
@@ -585,21 +643,22 @@ public class GiraffeAtlasEditor : Editor
           }
         }
         break;
-        case GiraffeAtlasImportDataType.Tileset:
+        case GiraffeAtlasImportDataType.TileSheetSquare:
+        case GiraffeAtlasImportDataType.TilesheetRectangular:
         {
           if (p.textureAsset != null)
           {
             var input = builder.Add(p.textureAsset.name, p.textureAsset, false);
             int x = 0;
-            int y = p.textureAsset.height - p.size;
+            int y = p.textureAsset.height - p.height;
             for (int i = 0; i < p.count; i++)
             {
-              input.Add(x, y, p.size, p.size);
-              x += p.size;
+              input.Add(x, y, p.width, p.height);
+              x += p.width;
               if (x >= p.textureAsset.width)
               {
                 x = 0;
-                y -= p.size;
+                y -= p.height;
               }
             }
           }
@@ -615,7 +674,7 @@ public class GiraffeAtlasEditor : Editor
       Object.DestroyImmediate(whiteTex);
     }
 
-    mAtlas.sprites.Clear();
+    mAtlas.ClearSprites();
     foreach (var s in sprites)
     {
       var sprite = new GiraffeSprite();
@@ -625,7 +684,7 @@ public class GiraffeAtlasEditor : Editor
       sprite.width = s.w;
       sprite.height = s.h;
       sprite.refreshNeeded = true;
-      mAtlas.sprites.Add(sprite);
+      mAtlas.AddSprite(sprite);
     }
 
     EditorUtility.SetDirty(mAtlas._importData);

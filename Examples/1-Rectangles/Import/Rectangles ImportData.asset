@@ -17,22 +17,26 @@ MonoBehaviour:
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: 2bb77f5668a26b54fb76c65882726494, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: 5dcb2d27cac4a5d4f8745370e5b8c697, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: 8e0bf0ab2e729b74d8291f09393632b3, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: 1bd4f55263fd7294ca29281e52496459, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   atlasOutOfDate: 0
   border: 4

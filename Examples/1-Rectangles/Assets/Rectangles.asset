@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atlasIdA: 1785038947
   atlasIdB: 114376378
-  sprites:
+  mSprites:
   - name: Giraffe/White
     left: 116
     top: 4

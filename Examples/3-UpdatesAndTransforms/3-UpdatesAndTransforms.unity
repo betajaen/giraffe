@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mZOrder: 0
   mAtlas: {fileID: 11400000, guid: 43ebb8941f223284c8ac906524f208eb, type: 2}
-  mMesh: {fileID: 0}
+  mScale: 1
 --- !u!114 &1666102587
 MonoBehaviour:
   m_ObjectHideFlags: 0

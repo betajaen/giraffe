@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public struct Matrix2D
 {
@@ -138,5 +139,9 @@ public struct Matrix2D
        position.x, position.y, 1.0f);
   }
 
+  public override string ToString()
+  {
+    return String.Format("[{0},{1},{2},  {3},{4},{5},  {6},{7},{8}]", m00, m01, m02, m10, m11, m12, m20, m21, m22);
+  }
 }
 

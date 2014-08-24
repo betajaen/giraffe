@@ -7,7 +7,8 @@ public enum GiraffeAtlasImportDataType
 {
   None,
   Texture2D,
-  Tileset,
+  TileSheetSquare,
+  TilesheetRectangular
 }
 
 [Serializable]
@@ -23,7 +24,10 @@ public class GiraffeAtlasImportDataPart
   public Texture2D textureAsset;
 
   [SerializeField]
-  public int size = 32;
+  public int width = 32;
+
+  [SerializeField]
+  public int height = 32;
 
   [SerializeField]
   public int count = 1;

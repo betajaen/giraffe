@@ -45,7 +45,6 @@ public class GiraffeFontEditor : Editor
     mFont = (GiraffeFont)this.target;
     mMode = 0;
     MakeSpriteNames();
-
   }
 
   public override void OnInspectorGUI()
@@ -315,25 +314,8 @@ public class GiraffeFontEditor : Editor
 
   private void MakeSpriteNames()
   {
-    if (mFont.atlas == null)
-    {
-      mSpriteNames = new String[1]
-      {
-        "Giraffe/White"
-      };
-      mCurrentSpriteNameId = 0;
-    }
-    else
-    {
-      mSpriteNames = new String[mFont.atlas.sprites.Count];
-      mCurrentSpriteNameId = 0;
-      for (int i = 0; i < mFont.atlas.sprites.Count; i++)
-      {
-        mSpriteNames[i] = mFont.atlas.sprites[i].name;
-        if (mSpriteNames[i] == mFont.spriteName)
-          mCurrentSpriteNameId = i;
-      }
-    }
+    GiraffeAtlas._GetNames(mFont.atlas, ref mSpriteNames);
+    mCurrentSpriteNameId = GiraffeAtlas._FindSpriteIndex(mFont.atlas, mFont.spriteName);
   }
 
   void RefreshGridPreview()

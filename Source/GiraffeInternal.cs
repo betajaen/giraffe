@@ -273,4 +273,20 @@ namespace GiraffeInternal
 
   }
 
+  public static class GiraffeUtils
+  {
+
+    public static T FindRecursiveComponentBackwards<T>(Transform self) where T : MonoBehaviour
+    {
+      while (self != null)
+      {
+        T component = self.GetComponent<T>();
+        if (component != null)
+          return component;
+        self = self.transform.parent;
+      }
+      return null;
+    }
+  }
+
 }

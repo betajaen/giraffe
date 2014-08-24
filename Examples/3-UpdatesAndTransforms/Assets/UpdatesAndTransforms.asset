@@ -13,13 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atlasIdA: 808786689
   atlasIdB: 187631692
-  sprites:
+  mSprites:
   - name: Box
     left: 8
     top: 8
     width: 32
     height: 32
-    scale: 16
+    scale: 1
     offsetX: 0
     offsetY: 0
   - name: Box1

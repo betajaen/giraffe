@@ -201,7 +201,6 @@ MonoBehaviour:
   mZOrder: 0
   mAtlas: {fileID: 11400000, guid: cca8706f6eaed4742a9c44298cfea3b7, type: 2}
   mScale: 2
-  mMesh: {fileID: 0}
 --- !u!114 &1666102587
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,7 +17,8 @@ MonoBehaviour:
   - type: 1
     textAsset: {fileID: 0}
     textureAsset: {fileID: 2800000, guid: f37cf74b6e8d97e41aea448f32dd9352, type: 3}
-    size: 32
+    width: 32
+    height: 32
     count: 1
   atlasOutOfDate: 0
   border: 0

@@ -201,7 +201,6 @@ MonoBehaviour:
   mZOrder: 0
   mAtlas: {fileID: 11400000, guid: 4e6ed58237766ca449162d98c5090a63, type: 2}
   mScale: 1
-  mMesh: {fileID: 0}
 --- !u!114 &1666102587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +249,7 @@ Camera:
   m_GameObject: {fileID: 1745635041}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2

@@ -1,15 +1,24 @@
 ﻿using System;
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using GiraffeInternal;
 
 public class GiraffeLayer : MonoBehaviour
 {
 
+  [NonSerialized]
   private Transform mTransform;
+
+  [NonSerialized]
   private Giraffe mGiraffe;
+
+  [NonSerialized]
   private bool mApplicationIsQuitting;
+
+  [NonSerialized]
   private bool mDirty;
+
+  [NonSerialized]
   private Layer mLayer;
 
   [SerializeField]
@@ -21,11 +30,11 @@ public class GiraffeLayer : MonoBehaviour
   [SerializeField]
   private int mScale = 1;
 
-  public Mesh mMesh;
+  [NonSerialized]
+  private Mesh mesh;
 
   void Awake()
   {
-    Matrix4x4 m;
     mApplicationIsQuitting = false;
     mDirty = false;
     mTransform = GetComponent<Transform>();
@@ -41,8 +50,8 @@ public class GiraffeLayer : MonoBehaviour
       Debug.LogException(new Exception("The parent GameObejct of this Giraffe Layer does not contain a Giraffe monobehaviour"), this);
     }
 
-    mMesh = new Mesh();
-    mLayer = new Layer(mMesh, mAtlas.material, mScale);
+    mesh = new Mesh();
+    mLayer = new Layer(mesh, mAtlas.material, mScale);
     mAtlas.RefreshSprites();
 
     if (mScale <= 0)
