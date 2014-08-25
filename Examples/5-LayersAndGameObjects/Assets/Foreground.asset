@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b61d2f31eb2464690f587d64c6eae7, type: 3}
+  m_Name: Foreground
+  m_EditorClassIdentifier: 
+  atlasIdA: 572370654
+  atlasIdB: 814637769
+  mSprites:
+  - name: Giraffe/White
+    left: 414
+    top: 2
+    width: 4
+    height: 4
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Ship1/0
+    left: 2
+    top: 115
+    width: 27
+    height: 21
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Ship1/1
+    left: 2
+    top: 94
+    width: 27
+    height: 21
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Ship1/2
+    left: 2
+    top: 73
+    width: 27
+    height: 21
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Ship1/3
+    left: 2
+    top: 52
+    width: 27
+    height: 21
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Ship1/4
+    left: 2
+    top: 31
+    width: 27
+    height: 21
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/0
+    left: 2
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/1
+    left: 26
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/2
+    left: 50
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/3
+    left: 74
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/4
+    left: 98
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/5
+    left: 122
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/6
+    left: 146
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/7
+    left: 170
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/8
+    left: 194
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/9
+    left: 218
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/10
+    left: 242
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/11
+    left: 266
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/12
+    left: 290
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/13
+    left: 314
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/14
+    left: 338
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/15
+    left: 362
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion1/16
+    left: 386
+    top: 3
+    width: 24
+    height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  texture: {fileID: 2800000, guid: f0e8aea9b30186041aa13d6baa5d7f1a, type: 3}
+  mEditorData: 
+  useCustomMaterial: 0
+  customMaterial: {fileID: 0}

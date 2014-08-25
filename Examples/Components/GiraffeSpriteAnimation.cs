@@ -84,6 +84,17 @@ public class GiraffeSpriteAnimation : ScriptableObject
       }
       break;
       case GiraffeAnimationMode.Once:
+      {
+        if (time >= animation.length)
+        {
+          time = animation.length;
+        }
+
+        float frameRate = animation.frames.Count / animation.length;
+        int frame = Mathf.Min((int)(time * frameRate), animation.frames.Count - 1);
+
+        return frame;
+      }
       break;
       case GiraffeAnimationMode.PingPong:
       break;

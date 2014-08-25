@@ -123,7 +123,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .256634027, g: .208747819, b: .286764681, a: .0196078438}
+  m_BackGroundColor: {r: .125, g: .112132356, b: .113995939, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -351,6 +351,7 @@ GameObject:
   - 4: {fileID: 2055556523}
   - 114: {fileID: 2055556525}
   - 114: {fileID: 2055556524}
+  - 114: {fileID: 2055556526}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -382,7 +383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSpriteName: Ship1/1
-  animation: []
   offsetX: 0
   offsetY: 0
 --- !u!114 &2055556525
@@ -396,3 +396,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4663c1194f2ae54887744de01605b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verticalAnimations:
+  - {fileID: 11400000, guid: a9b22e7137f6951449ef6aa4e18b488f, type: 2}
+  - {fileID: 11400000, guid: 1fed10c4328d0964891b40d32dcbef56, type: 2}
+  - {fileID: 11400000, guid: 1a74aef86c5f2904e97de369a64ef071, type: 2}
+--- !u!114 &2055556526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2055556522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0253b530a923ef6469dfa17e5f16470b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mAnimation: {fileID: 0}

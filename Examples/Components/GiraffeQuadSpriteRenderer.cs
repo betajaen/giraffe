@@ -9,9 +9,6 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
   [SerializeField]
   private String mSpriteName;
 
-  [SerializeField]
-  public GiraffeSpriteAnimation[] animation;
-
   [NonSerialized]
   private GiraffeSprite mSprite;
 
@@ -89,7 +86,9 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
     }
     set
     {
-      mSprite = sprite;
+      if (mSprite == value)
+        return;
+      mSprite = value;
       mSpriteName = sprite.name;
     }
   }

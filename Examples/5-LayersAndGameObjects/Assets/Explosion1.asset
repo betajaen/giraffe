@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd45c05a0b76c74385c5f76a3cf8920, type: 3}
+  m_Name: Explosion1
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 11400000, guid: b79773e222aec9e418a16eb55148c131, type: 2}
+  frames:
+  - Explosion1/0
+  - Explosion1/1
+  - Explosion1/2
+  - Explosion1/3
+  - Explosion1/4
+  - Explosion1/5
+  - Explosion1/6
+  - Explosion1/7
+  - Explosion1/8
+  - Explosion1/9
+  - Explosion1/10
+  - Explosion1/11
+  - Explosion1/12
+  - Explosion1/13
+  - Explosion1/14
+  - Explosion1/15
+  - Explosion1/16
+  offsetsX: 00000000
+  offsetsY: 00000000
+  length: .5
+  mode: 1
