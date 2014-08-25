@@ -16,7 +16,7 @@ MonoBehaviour:
   mSprites:
   - name: Giraffe/White
     left: 414
-    top: 2
+    top: 17
     width: 4
     height: 4
     scale: 1
@@ -195,6 +195,174 @@ MonoBehaviour:
     top: 3
     width: 24
     height: 24
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/0
+    left: 33
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/1
+    left: 45
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/2
+    left: 57
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/3
+    left: 69
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/4
+    left: 81
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/5
+    left: 93
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/6
+    left: 105
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/7
+    left: 117
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/8
+    left: 129
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/9
+    left: 141
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/10
+    left: 153
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/11
+    left: 165
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Explosion2/12
+    left: 177
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: PickupBomb/0
+    left: 414
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: PickupBomb/1
+    left: 425
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: PickupBomb/2
+    left: 436
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: PickupBomb/3
+    left: 447
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Bomb/0
+    left: 462
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Bomb/1
+    left: 473
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Bomb/2
+    left: 484
+    top: 2
+    width: 11
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Bomb/3
+    left: 495
+    top: 2
+    width: 11
+    height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
