@@ -16,7 +16,7 @@ MonoBehaviour:
   mSprites:
   - name: Giraffe/White
     left: 414
-    top: 17
+    top: 18
     width: 4
     height: 4
     scale: 1
@@ -303,66 +303,146 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/0
-    left: 414
-    top: 2
+    left: 257
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/1
-    left: 425
-    top: 2
+    left: 268
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/2
-    left: 436
-    top: 2
+    left: 279
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/3
-    left: 447
-    top: 2
+    left: 290
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/0
-    left: 462
-    top: 2
+    left: 305
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/1
-    left: 473
-    top: 2
+    left: 316
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/2
-    left: 484
-    top: 2
+    left: 327
+    top: 31
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/3
-    left: 495
-    top: 2
+    left: 338
+    top: 31
     width: 11
     height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserLeft/0
+    left: 414
+    top: 2
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserLeft/1
+    left: 426
+    top: 2
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserLeft/2
+    left: 438
+    top: 2
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserLeft/3
+    left: 450
+    top: 2
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserLeft/4
+    left: 462
+    top: 2
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserRight/0
+    left: 193
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserRight/1
+    left: 205
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserRight/2
+    left: 217
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserRight/3
+    left: 229
+    top: 31
+    width: 12
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: LaserRight/4
+    left: 241
+    top: 31
+    width: 12
+    height: 12
     scale: 1
     offsetX: 0
     offsetY: 0

@@ -67,12 +67,13 @@ public class GiraffeSpriteAnimation : ScriptableObject
     }
   }
 
-  public static int Animate(GiraffeSpriteAnimation animation, float time)
+  public static int Animate(GiraffeSpriteAnimation animation, float time, ref bool isPlaying)
   {
     switch (animation.mode)
     {
       case GiraffeAnimationMode.Loop:
       {
+        isPlaying = true;
         if (Mathf.Approximately(time, animation.length))
         {
           return animation.frames.Count - 1;
@@ -88,6 +89,7 @@ public class GiraffeSpriteAnimation : ScriptableObject
         if (time >= animation.length)
         {
           time = animation.length;
+          isPlaying = false;
         }
 
         float frameRate = animation.frames.Count / animation.length;

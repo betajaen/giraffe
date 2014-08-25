@@ -7,6 +7,9 @@ public class GiraffeQuadSpriteAnimator : MonoBehaviour
 {
 
   [SerializeField]
+  private bool mPlaying = true;
+
+  [SerializeField]
   private GiraffeSpriteAnimation mAnimation;
 
   [NonSerialized]
@@ -48,7 +51,10 @@ public class GiraffeQuadSpriteAnimator : MonoBehaviour
 
   void Update()
   {
-    time += Time.deltaTime;
+    if (mPlaying)
+    {
+      time += Time.deltaTime * Time.timeScale;
+    }
   }
 
   public float time
@@ -85,12 +91,26 @@ public class GiraffeQuadSpriteAnimator : MonoBehaviour
     }
   }
 
+  public bool playing
+  {
+    get
+    {
+      return mPlaying;
+    }
+    set
+    {
+      if (mPlaying == value)
+        return;
+      mPlaying = value;
+    }
+  }
+
   void UpdateAnimation()
   {
     if (mAnimation == null)
       return;
 
-    int frame = GiraffeSpriteAnimation.Animate(mAnimation, mTime);
+    int frame = GiraffeSpriteAnimation.Animate(mAnimation, mTime, ref mPlaying);
 
     if (frame != mCurrentFrame)
     {

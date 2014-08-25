@@ -33,6 +33,9 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
   [NonSerialized]
   private bool mApplicationIsQuitting;
 
+  [SerializeField]
+  public bool visible = true;
+
   void Awake()
   {
     mApplicationIsQuitting = false;
@@ -76,6 +79,11 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
   void RefreshTransform2D()
   {
     mTransform2D = Matrix2D.TRS(mTransform.position, 0.0f, sprite.size);
+  }
+
+  public GiraffeLayer layer
+  {
+    get { return mLayer; }
   }
 
   public GiraffeSprite sprite
@@ -130,12 +138,15 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
 
   public int GetQuadCount()
   {
-    return 1;
+    return visible ? 1 : 0;
   }
 
   public void DrawTo(GiraffeLayer layer)
   {
-    layer.Add(mTransform2D, mSprite);
+    if (visible)
+    {
+      layer.Add(mTransform2D, mSprite);
+    }
   }
 
 

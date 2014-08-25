@@ -80,7 +80,7 @@ public class GiraffeQuadRendererManager : MonoBehaviour
 
     foreach (var quad in mListeners)
     {
-      nbQuads = quad.GetQuadCount();
+      nbQuads += quad.GetQuadCount();
     }
 
     mLayer.Begin(nbQuads);

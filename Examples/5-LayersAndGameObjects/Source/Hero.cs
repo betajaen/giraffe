@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(GiraffeQuadSpriteRenderer), typeof(GiraffeQuadSpriteAnimator))]
-public class Hero : MonoBehaviour
+public class Hero : Ship
 {
 
   private int kMovement_Up = 1;
@@ -39,15 +39,26 @@ public class Hero : MonoBehaviour
   private int mAction;
   private float mSpeed;
 
-  private GiraffeQuadSpriteRenderer mSprite;
+  private GiraffeQuadSpriteRenderer mRenderer;
   private GiraffeQuadSpriteAnimator mAnimator;
   private Transform mTransform;
 
   public GiraffeSpriteAnimation[] verticalAnimations;
 
+  public GameObject bombPrefab;
+  public GameObject[] missilePrefabs;
+
+  public MissileFactory missileFactory;
+
+  private bool bombPressed, wasBombPressed;
+  private bool laserPressed, wasLaserPressed;
+  private float mFireTimer;
+
+  public float fireTime;
+
   void Start()
   {
-    mSprite = GetComponent<GiraffeQuadSpriteRenderer>();
+    mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
     mAnimator = GetComponent<GiraffeQuadSpriteAnimator>();
     mTransform = GetComponent<Transform>();
     mSpeed = 100;
@@ -74,6 +85,24 @@ public class Hero : MonoBehaviour
       mMovementFlags |= kMovement_Left;
     else
       mMovementFlags &= ~kMovement_Left;
+
+    wasBombPressed = bombPressed;
+    bombPressed = Input.GetKey(KeyCode.Q);
+
+    if (wasBombPressed && bombPressed == false)
+    {
+      GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.identity) as GameObject;
+      go.transform.parent = mTransform.parent;
+    }
+
+    wasLaserPressed = laserPressed;
+    laserPressed = Input.GetKey(KeyCode.Return);
+
+    if (laserPressed)
+    {
+      mFireTimer += Time.deltaTime;
+    }
+
   }
 
   void FixedUpdate()
@@ -86,6 +115,18 @@ public class Hero : MonoBehaviour
       mAnimator.animation = verticalAnimations[2];
     else
       mAnimator.animation = verticalAnimations[1];
+
+    if (mFireTimer > fireTime)
+    {
+      mFireTimer = 0.0f;
+      var missile = missileFactory.Add(missilePrefabs[0]);
+
+      Vector2 position = mTransform.position;
+      position.x += mRenderer.sprite.width * 0.5f;
+
+
+      missile.Fire(position, new Vector2(450.0f, 0.0f));
+    }
   }
 
 }

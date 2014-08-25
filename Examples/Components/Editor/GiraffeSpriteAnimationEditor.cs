@@ -299,7 +299,8 @@ public class GiraffeQuadSpriteAnimationEditor : Editor
 
     if (mAnimation.atlas != null)
     {
-      mAnimationSpriteId = GiraffeSpriteAnimation.Animate(mAnimation, mAnimationTime);
+      bool isPlayingIgnored = true;
+      mAnimationSpriteId = GiraffeSpriteAnimation.Animate(mAnimation, mAnimationTime, ref isPlayingIgnored);
       mAnimationSprite = mAnimation.frameSprites[mAnimationSpriteId];
     }
   }

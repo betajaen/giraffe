@@ -25,6 +25,11 @@ public class GiraffeQuadSpriteAnimatorEditor : Editor
     EditorGUI.indentLevel++;
 
     GUI.changed = false;
+    mAnimator.playing = EditorGUILayout.Toggle("Playing", mAnimator.playing);
+    if (GUI.changed)
+      changed = true;
+
+    GUI.changed = false;
 
     mAnimator.animation = EditorGUILayout.ObjectField("Animation", mAnimator.animation, typeof(GiraffeSpriteAnimation), false) as GiraffeSpriteAnimation;
 
