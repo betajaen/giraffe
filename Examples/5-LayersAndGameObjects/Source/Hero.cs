@@ -53,6 +53,7 @@ public class Hero : Ship
   private bool bombPressed, wasBombPressed;
   private bool laserPressed, wasLaserPressed;
   private float mFireTimer;
+  private int mWidth, mHeight;
 
   public float fireTime;
 
@@ -62,6 +63,8 @@ public class Hero : Ship
     mAnimator = GetComponent<GiraffeQuadSpriteAnimator>();
     mTransform = GetComponent<Transform>();
     mSpeed = 100;
+    mWidth = mRenderer.sprite.width;
+    mHeight = mRenderer.sprite.height;
   }
 
   void Update()
@@ -109,6 +112,20 @@ public class Hero : Ship
   {
     Vector3 nextMovement = kMovements[mMovementFlags];
     mTransform.localPosition = mTransform.localPosition + nextMovement * mSpeed * Time.deltaTime;
+
+
+    int hw = mHeight / 2;
+    int y1 = (Screen.height / mRenderer.layer.scale) - hw;
+
+    if (mTransform.localPosition.y < hw)
+    {
+      mTransform.localPosition = new Vector2(mTransform.localPosition.x, hw);
+    }
+    else if (mTransform.localPosition.y > y1)
+    {
+      mTransform.localPosition = new Vector2(mTransform.localPosition.x, y1);
+    }
+
     if (nextMovement.y < 0)
       mAnimator.animation = verticalAnimations[0];
     else if (nextMovement.y > 0)
@@ -123,7 +140,6 @@ public class Hero : Ship
 
       Vector2 position = mTransform.position;
       position.x += mRenderer.sprite.width * 0.5f;
-
 
       missile.Fire(position, new Vector2(450.0f, 0.0f));
     }

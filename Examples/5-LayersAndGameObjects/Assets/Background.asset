@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b61d2f31eb2464690f587d64c6eae7, type: 3}
+  m_Name: Background
+  m_EditorClassIdentifier: 
+  atlasIdA: 1895507456
+  atlasIdB: 464137697
+  mSprites:
+  - name: Lava/0
+    left: 2
+    top: 86
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/1
+    left: 26
+    top: 86
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/2
+    left: 50
+    top: 86
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/3
+    left: 2
+    top: 58
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/4
+    left: 26
+    top: 58
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/5
+    left: 50
+    top: 58
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/6
+    left: 2
+    top: 30
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/7
+    left: 26
+    top: 30
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/8
+    left: 50
+    top: 30
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/9
+    left: 2
+    top: 2
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/10
+    left: 26
+    top: 2
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Lava/11
+    left: 50
+    top: 2
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Sand/0
+    left: 2
+    top: 118
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Sand/1
+    left: 26
+    top: 118
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Sand/2
+    left: 50
+    top: 118
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Sand/3
+    left: 74
+    top: 118
+    width: 24
+    height: 28
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  texture: {fileID: 2800000, guid: 1e89a9159dd60754598b7284dbe3b81a, type: 3}
+  mEditorData: 
+  useCustomMaterial: 0
+  customMaterial: {fileID: 0}
