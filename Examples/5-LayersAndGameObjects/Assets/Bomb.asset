@@ -19,5 +19,5 @@ MonoBehaviour:
   - Bomb/3
   offsetsX: 00000000
   offsetsY: 00000000
-  length: 2
+  length: .5
   mode: 1

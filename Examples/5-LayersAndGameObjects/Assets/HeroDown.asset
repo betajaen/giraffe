@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atlas: {fileID: 11400000, guid: b79773e222aec9e418a16eb55148c131, type: 2}
   frames:
+  - Ship1/2
   - Ship1/3
   - Ship1/4
   offsetsX: 00000000

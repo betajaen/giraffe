@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fd45c05a0b76c74385c5f76a3cf8920, type: 3}
-  m_Name: HeroUp
+  m_Name: EnemyFighterDown
   m_EditorClassIdentifier: 
   atlas: {fileID: 11400000, guid: b79773e222aec9e418a16eb55148c131, type: 2}
   frames:
-  - Ship1/2
-  - Ship1/1
-  - Ship1/0
+  - Enemy2/2
+  - Enemy2/3
+  - Enemy2/4
   offsetsX: 00000000
   offsetsY: 00000000
   length: .25

@@ -3,11 +3,29 @@ using GiraffeInternal;
 using UnityEngine;
 using System.Collections;
 
+public enum MissileType
+{
+  Laser,
+  Bomb
+}
+
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class Missile : MonoBehaviour
 {
   [SerializeField]
-  private int damage;
+  public int damage;
+
+  [SerializeField]
+  public MissileType type;
+
+  [SerializeField]
+  public int explosiveRadius;
+
+  [SerializeField]
+  private GiraffeSpriteAnimation animation;
+
+  [SerializeField]
+  public GiraffeSpriteAnimation explosionAnimation;
 
   [NonSerialized]
   private Transform mTransform;
@@ -22,10 +40,16 @@ public class Missile : MonoBehaviour
   private GiraffeQuadSpriteRenderer mRenderer;
 
   [NonSerialized]
+  private GiraffeQuadSpriteAnimator mAnimator;
+
+  [NonSerialized]
   private float mTimer;
 
   [NonSerialized]
   public bool isActive;
+
+  [NonSerialized]
+  private int mMode;
 
   void Awake()
   {
@@ -33,6 +57,11 @@ public class Missile : MonoBehaviour
     mRigidBody = GetComponent<Rigidbody2D>();
     mCollider = GetComponent<BoxCollider2D>();
     mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
+    mAnimator = GetComponent<GiraffeQuadSpriteAnimator>();
+    if (mAnimator != null)
+    {
+      animation = mAnimator.animation;
+    }
   }
 
   void FixedUpdate()
@@ -50,6 +79,37 @@ public class Missile : MonoBehaviour
       mRigidBody.angularVelocity = 0.0f;
       isActive = false;
       mRenderer.visible = false;
+      return;
+    }
+
+    switch (type)
+    {
+      case MissileType.Laser:
+      {
+
+      }
+      break;
+      case MissileType.Bomb:
+      {
+        if (mMode == 0)
+        {
+          if (mAnimator.playing == false)
+          {
+            mAnimator.animation = explosionAnimation;
+            mAnimator.time = 0.0f;
+            mAnimator.playing = true;
+            mMode = 1;
+          }
+        }
+        else if (mMode == 1)
+        {
+          if (mAnimator.playing == false)
+          {
+            Destroy(gameObject);
+          }
+        }
+      }
+      break;
     }
   }
 
@@ -62,6 +122,15 @@ public class Missile : MonoBehaviour
     mRenderer.visible = true;
     isActive = true;
     mTimer = 0.0f;
+    mMode = 0;
+
+    if (mAnimator != null)
+    {
+      mAnimator.animation = animation;
+      mAnimator.playing = true;
+      mAnimator.time = 0.0f;
+    }
+
   }
 
 }

@@ -56,7 +56,37 @@ MonoBehaviour:
     width: 12
     height: 12
     count: 5
+  - type: 3
+    textAsset: {fileID: 0}
+    textureAsset: {fileID: 2800000, guid: d3429ae037c7d4a419af0804b0a35e12, type: 3}
+    width: 14
+    height: 12
+    count: 6
+  - type: 3
+    textAsset: {fileID: 0}
+    textureAsset: {fileID: 2800000, guid: 05d28cdc71b85b14d923e9ee9f21f504, type: 3}
+    width: 25
+    height: 18
+    count: 5
+  - type: 3
+    textAsset: {fileID: 0}
+    textureAsset: {fileID: 2800000, guid: 8753d74c2a66a234999d74a4fcede71a, type: 3}
+    width: 13
+    height: 10
+    count: 3
+  - type: 3
+    textAsset: {fileID: 0}
+    textureAsset: {fileID: 2800000, guid: eb3762970881ad44fbf6621169f7479b, type: 3}
+    width: 13
+    height: 11
+    count: 5
+  - type: 3
+    textAsset: {fileID: 0}
+    textureAsset: {fileID: 2800000, guid: a19ecdfdd36aec04197049244c49dad4, type: 3}
+    width: 19
+    height: 15
+    count: 5
   atlasOutOfDate: 0
   border: 2
   padding: 0
-  generateWhiteTexture: 1
+  generateWhiteTexture: 0

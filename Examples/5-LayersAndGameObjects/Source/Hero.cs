@@ -52,10 +52,10 @@ public class Hero : Ship
 
   private bool bombPressed, wasBombPressed;
   private bool laserPressed, wasLaserPressed;
-  private float mFireTimer;
+  private float mFireTimer, mBombTimer;
   private int mWidth, mHeight;
 
-  public float fireTime;
+  public float fireTime, bombTime;
 
   void Start()
   {
@@ -90,12 +90,11 @@ public class Hero : Ship
       mMovementFlags &= ~kMovement_Left;
 
     wasBombPressed = bombPressed;
-    bombPressed = Input.GetKey(KeyCode.Q);
+    bombPressed = Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.RightShift);
 
-    if (wasBombPressed && bombPressed == false)
+    if (bombPressed)
     {
-      GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.identity) as GameObject;
-      go.transform.parent = mTransform.parent;
+      mBombTimer -= Time.deltaTime;
     }
 
     wasLaserPressed = laserPressed;
@@ -127,11 +126,27 @@ public class Hero : Ship
     }
 
     if (nextMovement.y < 0)
-      mAnimator.animation = verticalAnimations[0];
+    {
+      if (mAnimator.animation != verticalAnimations[0])
+      {
+        mAnimator.animation = verticalAnimations[0];
+        mAnimator.playing = true;
+        mAnimator.time = 0.0f;
+      }
+    }
     else if (nextMovement.y > 0)
-      mAnimator.animation = verticalAnimations[2];
-    else
+    {
+      if (mAnimator.animation != verticalAnimations[2])
+      {
+        mAnimator.animation = verticalAnimations[2];
+        mAnimator.playing = true;
+        mAnimator.time = 0.0f;
+      }
+    }
+    else if (mAnimator.animation != verticalAnimations[1])
+    {
       mAnimator.animation = verticalAnimations[1];
+    }
 
     if (mFireTimer > fireTime)
     {
@@ -142,6 +157,17 @@ public class Hero : Ship
       position.x += mRenderer.sprite.width * 0.5f;
 
       missile.Fire(position, new Vector2(450.0f, 0.0f));
+    }
+
+    if (mBombTimer < 0.0f)
+    {
+      mBombTimer = bombTime;
+
+      var bomb = missileFactory.Add(bombPrefab);
+      Vector2 position = mTransform.position;
+      position.x += mRenderer.sprite.width * 0.5f;
+
+      bomb.Fire(position, new Vector2(275.0f, 0.0f));
     }
   }
 

@@ -14,14 +14,6 @@ MonoBehaviour:
   atlasIdA: 572370654
   atlasIdB: 814637769
   mSprites:
-  - name: Giraffe/White
-    left: 414
-    top: 18
-    width: 4
-    height: 4
-    scale: 1
-    offsetX: 0
-    offsetY: 0
   - name: Ship1/0
     left: 2
     top: 115
@@ -199,7 +191,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/0
-    left: 33
+    left: 162
     top: 31
     width: 12
     height: 12
@@ -207,7 +199,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/1
-    left: 45
+    left: 174
     top: 31
     width: 12
     height: 12
@@ -215,7 +207,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/2
-    left: 57
+    left: 186
     top: 31
     width: 12
     height: 12
@@ -223,7 +215,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/3
-    left: 69
+    left: 198
     top: 31
     width: 12
     height: 12
@@ -231,7 +223,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/4
-    left: 81
+    left: 210
     top: 31
     width: 12
     height: 12
@@ -239,7 +231,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/5
-    left: 93
+    left: 222
     top: 31
     width: 12
     height: 12
@@ -247,7 +239,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/6
-    left: 105
+    left: 234
     top: 31
     width: 12
     height: 12
@@ -255,7 +247,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/7
-    left: 117
+    left: 246
     top: 31
     width: 12
     height: 12
@@ -263,7 +255,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/8
-    left: 129
+    left: 258
     top: 31
     width: 12
     height: 12
@@ -271,7 +263,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/9
-    left: 141
+    left: 270
     top: 31
     width: 12
     height: 12
@@ -279,7 +271,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/10
-    left: 153
+    left: 282
     top: 31
     width: 12
     height: 12
@@ -287,7 +279,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/11
-    left: 165
+    left: 294
     top: 31
     width: 12
     height: 12
@@ -295,7 +287,7 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: Explosion2/12
-    left: 177
+    left: 306
     top: 31
     width: 12
     height: 12
@@ -303,146 +295,338 @@ MonoBehaviour:
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/0
-    left: 257
-    top: 31
+    left: 161
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/1
-    left: 268
-    top: 31
+    left: 172
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/2
-    left: 279
-    top: 31
+    left: 183
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: PickupBomb/3
-    left: 290
-    top: 31
+    left: 194
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/0
-    left: 305
-    top: 31
+    left: 209
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/1
-    left: 316
-    top: 31
+    left: 220
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/2
-    left: 327
-    top: 31
+    left: 231
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: Bomb/3
-    left: 338
-    top: 31
+    left: 242
+    top: 53
     width: 11
     height: 11
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserLeft/0
-    left: 414
-    top: 2
+    left: 33
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserLeft/1
-    left: 426
-    top: 2
+    left: 45
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserLeft/2
-    left: 438
-    top: 2
+    left: 57
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserLeft/3
-    left: 450
-    top: 2
+    left: 69
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserLeft/4
-    left: 462
-    top: 2
+    left: 81
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserRight/0
-    left: 193
-    top: 31
+    left: 97
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserRight/1
-    left: 205
-    top: 31
+    left: 109
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserRight/2
-    left: 217
-    top: 31
+    left: 121
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserRight/3
-    left: 229
-    top: 31
+    left: 133
+    top: 53
     width: 12
     height: 12
     scale: 1
     offsetX: 0
     offsetY: 0
   - name: LaserRight/4
-    left: 241
-    top: 31
+    left: 145
+    top: 53
     width: 12
     height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/0
+    left: 322
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/1
+    left: 336
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/2
+    left: 350
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/3
+    left: 364
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/4
+    left: 378
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy1/5
+    left: 392
+    top: 31
+    width: 14
+    height: 12
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy2/0
+    left: 33
+    top: 31
+    width: 25
+    height: 18
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy2/1
+    left: 58
+    top: 31
+    width: 25
+    height: 18
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy2/2
+    left: 83
+    top: 31
+    width: 25
+    height: 18
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy2/3
+    left: 108
+    top: 31
+    width: 25
+    height: 18
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy2/4
+    left: 133
+    top: 31
+    width: 25
+    height: 18
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy3/0
+    left: 257
+    top: 53
+    width: 13
+    height: 10
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy3/1
+    left: 270
+    top: 53
+    width: 13
+    height: 10
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy3/2
+    left: 283
+    top: 53
+    width: 13
+    height: 10
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy4/0
+    left: 410
+    top: 31
+    width: 13
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy4/1
+    left: 423
+    top: 31
+    width: 13
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy4/2
+    left: 436
+    top: 31
+    width: 13
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy4/3
+    left: 449
+    top: 31
+    width: 13
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy4/4
+    left: 462
+    top: 31
+    width: 13
+    height: 11
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy5/0
+    left: 414
+    top: 2
+    width: 19
+    height: 15
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy5/1
+    left: 433
+    top: 2
+    width: 19
+    height: 15
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy5/2
+    left: 452
+    top: 2
+    width: 19
+    height: 15
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy5/3
+    left: 471
+    top: 2
+    width: 19
+    height: 15
+    scale: 1
+    offsetX: 0
+    offsetY: 0
+  - name: Enemy5/4
+    left: 490
+    top: 2
+    width: 19
+    height: 15
     scale: 1
     offsetX: 0
     offsetY: 0

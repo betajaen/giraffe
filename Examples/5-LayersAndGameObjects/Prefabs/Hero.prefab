@@ -56,6 +56,7 @@ MonoBehaviour:
   mSpriteName: Ship1/1
   offsetX: 0
   offsetY: 0
+  visible: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +80,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 1864abf524540364ca66b2957c5a4137, type: 2}
   - {fileID: 100000, guid: 48fbe1281f3e6c1439ae0903415cbee2, type: 2}
   missileFactory: {fileID: 0}
+  fireTime: .0500000007
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
