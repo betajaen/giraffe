@@ -36,7 +36,7 @@ public class MissileFactory : MonoBehaviour
     if (missile == null)
     {
       GameObject go = Instantiate(prefab) as GameObject;
-      go.transform.parent = transform.parent;
+      go.transform.parent = transform;
       missile = go.GetComponent<Missile>();
       missiles.Add(missile);
     }

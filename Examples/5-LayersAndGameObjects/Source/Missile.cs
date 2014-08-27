@@ -51,6 +51,9 @@ public class Missile : MonoBehaviour
   [NonSerialized]
   private int mMode;
 
+  [NonSerialized]
+  public Ship owner;
+
   void Awake()
   {
     mTransform = GetComponent<Transform>();
@@ -113,7 +116,7 @@ public class Missile : MonoBehaviour
     }
   }
 
-  public void Fire(Vector2 position, Vector2 velocity)
+  public void Fire(Ship ship, Vector2 position, Vector2 velocity)
   {
     mTransform.position = position;
     mTransform.rotation = Quaternion.identity;
@@ -123,6 +126,7 @@ public class Missile : MonoBehaviour
     isActive = true;
     mTimer = 0.0f;
     mMode = 0;
+    owner = ship;
 
     if (mAnimator != null)
     {

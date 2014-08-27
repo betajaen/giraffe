@@ -156,7 +156,7 @@ public class Hero : Ship
       Vector2 position = mTransform.position;
       position.x += mRenderer.sprite.width * 0.5f;
 
-      missile.Fire(position, new Vector2(450.0f, 0.0f));
+      missile.Fire(this, position, new Vector2(450.0f, 0.0f));
     }
 
     if (mBombTimer < 0.0f)
@@ -167,8 +167,19 @@ public class Hero : Ship
       Vector2 position = mTransform.position;
       position.x += mRenderer.sprite.width * 0.5f;
 
-      bomb.Fire(position, new Vector2(275.0f, 0.0f));
+      bomb.Fire(this, position, new Vector2(275.0f, 0.0f));
     }
   }
 
+  public override void Hit(Missile missile)
+  {
+    if (missile.owner == this)
+      return;
+    Debug.Log("Boom!");
+  }
+
+  public override void Hit(Ship ship)
+  {
+    Debug.Log("Collision!");
+  }
 }

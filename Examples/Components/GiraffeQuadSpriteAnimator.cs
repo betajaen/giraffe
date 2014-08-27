@@ -27,6 +27,8 @@ public class GiraffeQuadSpriteAnimator : MonoBehaviour
   void Awake()
   {
     mApplicationIsQuitting = false;
+    mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
+    mCurrentFrame = -1;
   }
 
   void OnApplicationQuit()
@@ -40,8 +42,6 @@ public class GiraffeQuadSpriteAnimator : MonoBehaviour
 
   void Start()
   {
-    mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
-    mCurrentFrame = -1;
     if (mAnimation != null && Application.isPlaying)
     {
       mAnimation.FetchSprites();

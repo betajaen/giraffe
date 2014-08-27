@@ -8,12 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400004}
   - 61: {fileID: 6100000}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: EnemyFighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 50, z: 0}
+  m_LocalPosition: {x: 600, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,13 +50,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f4be46049466941848459ece456fd3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0253b530a923ef6469dfa17e5f16470b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpriteName: Ship1/1
-  offsetX: 0
-  offsetY: 0
-  visible: 1
+  mPlaying: 0
+  mAnimation: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,23 +63,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4663c1194f2ae54887744de01605b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 10f4be46049466941848459ece456fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalAnimations:
-  - {fileID: 11400000, guid: a9b22e7137f6951449ef6aa4e18b488f, type: 2}
-  - {fileID: 11400000, guid: 1fed10c4328d0964891b40d32dcbef56, type: 2}
-  - {fileID: 11400000, guid: 1a74aef86c5f2904e97de369a64ef071, type: 2}
-  bombPrefab: {fileID: 100000, guid: 6b19ba0e4bc155f47b28309eee252c35, type: 2}
-  missilePrefabs:
-  - {fileID: 100000, guid: 06aef67f70569c4488890b53efaab4d8, type: 2}
-  - {fileID: 100000, guid: 0c62bd33053d98d46932cdb6dc4afb34, type: 2}
-  - {fileID: 100000, guid: 7ed28e44a8c17b84d83700ce94dc146a, type: 2}
-  - {fileID: 100000, guid: 1864abf524540364ca66b2957c5a4137, type: 2}
-  - {fileID: 100000, guid: 48fbe1281f3e6c1439ae0903415cbee2, type: 2}
-  missileFactory: {fileID: 0}
-  fireTime: .0500000007
-  bombTime: .200000003
+  mSpriteName: Enemy2/2
+  offsetX: 0
+  offsetY: 0
+  visible: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,11 +78,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0253b530a923ef6469dfa17e5f16470b, type: 3}
+  m_Script: {fileID: 11500000, guid: ee1f57be5b40a1843a5071a8f6d29dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPlaying: 1
-  mAnimation: {fileID: 0}
+  movementStyle: 1
+  movementRadius: 10
+  speed: 10
+  angleSpeed: 5
+  weapon: {fileID: 11400000, guid: ac14268eb5cc83641945232e57401e8b, type: 2}
+  fireRate: .400000006
+  explosionAnimation: {fileID: 11400000, guid: 619ad6e68c975b1479e478c8af7ed08b, type: 2}
+  verticalAnimations:
+  - {fileID: 11400000, guid: e095303693d23bd46881d86e9c042251, type: 2}
+  - {fileID: 11400000, guid: 9c615bbc9d287804f90f277f4d3cff6b, type: 2}
+  - {fileID: 11400000, guid: aa79e2a144f41df4483d617214fff3d0, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -2,11 +2,8 @@
 using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class Ship : MonoBehaviour
+public abstract class Ship : MonoBehaviour
 {
-
-  public virtual void Hit(Ship other)
-  {
-  }
-
+  public abstract void Hit(Missile missile);
+  public abstract void Hit(Ship ship);
 }
