@@ -6,6 +6,9 @@ using System.Collections;
 public class Hero : Ship
 {
 
+  public static float msEnemyTargetX;
+  public static float msEnemyTargetY;
+
   private int kMovement_Up = 1;
   private int kMovement_Down = 2;
   private int kMovement_Left = 4;
@@ -125,6 +128,9 @@ public class Hero : Ship
       mTransform.localPosition = new Vector2(mTransform.localPosition.x, y1);
     }
 
+    msEnemyTargetX = mTransform.localPosition.x;
+    msEnemyTargetY = mTransform.localPosition.y;
+
     if (nextMovement.y < 0)
     {
       if (mAnimator.animation != verticalAnimations[0])
@@ -175,11 +181,9 @@ public class Hero : Ship
   {
     if (missile.owner == this)
       return;
-    Debug.Log("Boom!");
   }
 
   public override void Hit(Ship ship)
   {
-    Debug.Log("Collision!");
   }
 }

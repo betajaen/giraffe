@@ -75,21 +75,31 @@ public class EnemyFactory : MonoBehaviour
 
   void Start()
   {
+    SpawnWave();
+  }
+
+  void FixedUpdate()
+  {
     if (currentWave == null || currentWave.enemies.Count == 0)
     {
-      int nextWaveId = Time.frameCount % waves.Length;
-      currentWave = waves[nextWaveId];
-      int nbEnemies = UnityEngine.Random.Range(currentWave.minCount, currentWave.maxCount);
-      int sw = Screen.width / mLayer.scale;
-      int sh = Screen.height / mLayer.scale;
-      int c = sh / nbEnemies;
-      for (int i = 0; i < nbEnemies; i++)
-      {
-        int index = UnityEngine.Random.Range(0, currentWave.prefabs.Length);
-        var enemy = Add(currentWave.prefabs[index]);
-        enemy.Spawn(sw, c * i, currentWave);
-        currentWave.enemies.Add(enemy);
-      }
+      SpawnWave();
+    }
+  }
+
+  void SpawnWave()
+  {
+    int nextWaveId = Time.frameCount % waves.Length;
+    currentWave = waves[nextWaveId];
+    int nbEnemies = UnityEngine.Random.Range(currentWave.minCount, currentWave.maxCount);
+    int sw = Screen.width / mLayer.scale;
+    int sh = Screen.height / mLayer.scale;
+    int c = sh / nbEnemies;
+    for (int i = 0; i < nbEnemies; i++)
+    {
+      int index = UnityEngine.Random.Range(0, currentWave.prefabs.Length);
+      var enemy = Add(currentWave.prefabs[index]);
+      enemy.Spawn(sw, c * i, currentWave);
+      currentWave.enemies.Add(enemy);
     }
   }
 

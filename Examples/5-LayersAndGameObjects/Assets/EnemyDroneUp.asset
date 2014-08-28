@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd45c05a0b76c74385c5f76a3cf8920, type: 3}
+  m_Name: EnemyDroneUp
+  m_EditorClassIdentifier: 
+  atlas: {fileID: 11400000, guid: b79773e222aec9e418a16eb55148c131, type: 2}
+  frames:
+  - Enemy5/2
+  - Enemy5/1
+  - Enemy5/0
+  offsetsX: 00000000
+  offsetsY: 00000000
+  length: .25
+  mode: 1

@@ -310,6 +310,10 @@ MonoBehaviour:
     - {fileID: 100000, guid: 1b74e01af429a2344a8dc6ba652d5171, type: 2}
     minCount: 3
     maxCount: 9
+  - prefabs:
+    - {fileID: 100000, guid: 98b62410a138f4f479c172db6868c763, type: 2}
+    minCount: 6
+    maxCount: 15
 --- !u!1 &1671588552
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +515,7 @@ GameObject:
   - 114: {fileID: 2055556524}
   - 114: {fileID: 2055556526}
   - 61: {fileID: 2055556527}
+  - 50: {fileID: 2055556528}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -595,6 +600,22 @@ BoxCollider2D:
   m_GameObject: {fileID: 2055556522}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 27, y: 21}
   m_Center: {x: 0, y: 0}
+--- !u!50 &2055556528
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5000000, guid: 64ea022d5d3ce584283dc14e0b5c3b6d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1203021956}
+  m_GameObject: {fileID: 2055556522}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: .0500000007
+  m_GravityScale: 0
+  m_FixedAngle: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0

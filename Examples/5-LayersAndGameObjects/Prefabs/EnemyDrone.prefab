@@ -10,11 +10,11 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  - 50: {fileID: 5000000}
-  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
+  - 61: {fileID: 6100000}
+  - 50: {fileID: 5000000}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: EnemyDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 100, z: 0}
+  m_LocalPosition: {x: 600, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39,7 +39,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mass: 1
-  m_LinearDrag: .5
+  m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
   m_FixedAngle: 0
@@ -55,26 +55,10 @@ BoxCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: 11, y: 11}
+  m_IsTrigger: 1
+  m_Size: {x: 19, y: 15}
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0822d5efa2f9dc4489cf605a026c1789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 200
-  type: 1
-  explosiveRadius: 70
-  animation: {fileID: 0}
-  explosionAnimation: {fileID: 11400000, guid: 619ad6e68c975b1479e478c8af7ed08b, type: 2}
---- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,9 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0253b530a923ef6469dfa17e5f16470b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPlaying: 1
-  mAnimation: {fileID: 11400000, guid: 5b93eb3a623f2314fb91b17bf292ef8b, type: 2}
---- !u!114 &11400004
+  mPlaying: 0
+  mAnimation: {fileID: 0}
+--- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,10 +82,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f4be46049466941848459ece456fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpriteName: Bomb/0
+  mSpriteName: Enemy5/0
   offsetX: 0
   offsetY: 0
   visible: 1
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1f57be5b40a1843a5071a8f6d29dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementStyle: 2
+  movementRadius: 1
+  speed: 5
+  angleSpeed: 5
+  weapon: {fileID: 11400000, guid: ac14268eb5cc83641945232e57401e8b, type: 2}
+  fireRate: .400000006
+  explosionAnimation: {fileID: 11400000, guid: 619ad6e68c975b1479e478c8af7ed08b, type: 2}
+  verticalAnimations:
+  - {fileID: 11400000, guid: ff220123e364bce4bbed7b5b49c135d1, type: 2}
+  - {fileID: 11400000, guid: 6f203ea8f97c8bd4d96e2cc518e54766, type: 2}
+  - {fileID: 11400000, guid: 6b1390abc3a548746bfd40266d34d245, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -54,7 +54,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Size: {x: 12, y: 12}
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
@@ -69,6 +69,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+  type: 0
+  explosiveRadius: 0
+  animation: {fileID: 0}
+  explosionAnimation: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,6 +87,7 @@ MonoBehaviour:
   mSpriteName: LaserRight/4
   offsetX: 0
   offsetY: 0
+  visible: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
