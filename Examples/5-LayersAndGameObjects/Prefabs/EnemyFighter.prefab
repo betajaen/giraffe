@@ -83,8 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSpriteName: Enemy2/2
-  offsetX: 0
-  offsetY: 0
+  mScale: 1
   visible: 1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -103,7 +102,7 @@ MonoBehaviour:
   angleSpeed: 5
   weapon: {fileID: 11400000, guid: ac14268eb5cc83641945232e57401e8b, type: 2}
   fireRate: .400000006
-  explosionAnimation: {fileID: 11400000, guid: 619ad6e68c975b1479e478c8af7ed08b, type: 2}
+  explosionMissile: {fileID: 100000, guid: 2b2128f9b56cb234ebd278963c8281a8, type: 2}
   verticalAnimations:
   - {fileID: 11400000, guid: e095303693d23bd46881d86e9c042251, type: 2}
   - {fileID: 11400000, guid: 9c615bbc9d287804f90f277f4d3cff6b, type: 2}

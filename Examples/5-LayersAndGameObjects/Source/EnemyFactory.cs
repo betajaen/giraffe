@@ -34,10 +34,14 @@ public class EnemyFactory : MonoBehaviour
   [NonSerialized]
   private GiraffeLayer mLayer;
 
+  [NonSerialized]
+  private MissileFactory mMissileFactory;
+
   void Awake()
   {
     mEnemies = new Dictionary<GameObject, List<Enemy>>(4);
     mLayer = GetComponent<GiraffeLayer>();
+    mMissileFactory = GetComponent<MissileFactory>();
   }
 
   public Enemy Add(GameObject prefab)
@@ -52,7 +56,7 @@ public class EnemyFactory : MonoBehaviour
     Enemy enemy = null;
     foreach (var m in enemies)
     {
-      if (m.isActive == false)
+      if (m.gameObject.activeSelf == false)
       {
         enemy = m;
         break;
@@ -63,6 +67,8 @@ public class EnemyFactory : MonoBehaviour
       GameObject go = Instantiate(prefab) as GameObject;
       go.transform.parent = transform;
       enemy = go.GetComponent<Enemy>();
+      enemy.factory = this;
+      enemy.missileFactory = mMissileFactory;
       enemies.Add(enemy);
     }
     else

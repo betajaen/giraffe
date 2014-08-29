@@ -169,10 +169,10 @@ public class Hero : Ship
     {
       mBombTimer = bombTime;
 
-      var bomb = missileFactory.Add(bombPrefab);
       Vector2 position = mTransform.position;
       position.x += mRenderer.sprite.width * 0.5f;
 
+      var bomb = missileFactory.Add(bombPrefab);
       bomb.Fire(this, position, new Vector2(275.0f, 0.0f));
     }
   }

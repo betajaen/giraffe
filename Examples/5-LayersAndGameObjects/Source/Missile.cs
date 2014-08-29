@@ -6,7 +6,8 @@ using System.Collections;
 public enum MissileType
 {
   Laser,
-  Bomb
+  Bomb,
+  Explosion
 }
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
@@ -22,10 +23,13 @@ public class Missile : MonoBehaviour
   public int explosiveRadius;
 
   [SerializeField]
-  private GiraffeSpriteAnimation animation;
+  public GameObject secondaryMissile;
 
   [SerializeField]
-  public GiraffeSpriteAnimation explosionAnimation;
+  public int secondaryMissileMin;
+
+  [SerializeField]
+  public int secondaryMissileMax;
 
   [NonSerialized]
   private Transform mTransform;
@@ -46,13 +50,13 @@ public class Missile : MonoBehaviour
   private float mTimer;
 
   [NonSerialized]
-  public bool isActive;
-
-  [NonSerialized]
   private int mMode;
 
   [NonSerialized]
   public Ship owner;
+
+  [NonSerialized]
+  public MissileFactory factory;
 
   void Awake()
   {
@@ -61,10 +65,6 @@ public class Missile : MonoBehaviour
     mCollider = GetComponent<BoxCollider2D>();
     mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
     mAnimator = GetComponent<GiraffeQuadSpriteAnimator>();
-    if (mAnimator != null)
-    {
-      animation = mAnimator.animation;
-    }
   }
 
   void FixedUpdate()
@@ -80,8 +80,8 @@ public class Missile : MonoBehaviour
     {
       mRigidBody.velocity = Vector2.zero;
       mRigidBody.angularVelocity = 0.0f;
-      isActive = false;
       mRenderer.visible = false;
+      gameObject.SetActive(false);
       return;
     }
 
@@ -89,31 +89,58 @@ public class Missile : MonoBehaviour
     {
       case MissileType.Laser:
       {
-
       }
       break;
       case MissileType.Bomb:
       {
-        if (mMode == 0)
+        if (mAnimator.playing == false)
         {
-          if (mAnimator.playing == false)
-          {
-            mAnimator.animation = explosionAnimation;
-            mAnimator.time = 0.0f;
-            mAnimator.playing = true;
-            mMode = 1;
-          }
+          SpawnSecondary();
+          mRenderer.visible = false;
+          gameObject.SetActive(false);
         }
-        else if (mMode == 1)
+      }
+      break;
+      case MissileType.Explosion:
+      {
+        if (mAnimator.playing == false)
         {
-          if (mAnimator.playing == false)
+          RaycastHit2D[] hits = Physics2D.CircleCastAll(mTransform.position, explosiveRadius, new Vector2(1, 0),
+            explosiveRadius * 0.25f);
+          foreach (var hit in hits)
           {
-            Destroy(gameObject);
+            var c = hit.collider.GetComponent<Ship>();
+            if (c != null)
+            {
+              c.Hit(this);
+            }
           }
+          mRenderer.visible = false;
+          gameObject.SetActive(false);
         }
       }
       break;
     }
+  }
+
+  void SpawnSecondary()
+  {
+    int count = UnityEngine.Random.Range(secondaryMissileMin, secondaryMissileMax);
+
+    Vector2 pos = mTransform.position;
+    Vector2 vel = mRigidBody.velocity;
+
+    for (int i = 0; i < secondaryMissileMax; i++)
+    {
+      var go = factory.Add(secondaryMissile);
+      var missile = go.GetComponent<Missile>();
+      float angle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI);
+      float distance = UnityEngine.Random.Range(0.0f, explosiveRadius);
+      float xOffset = Mathf.Cos(angle) * distance;
+      float yOffset = Mathf.Sin(angle) * distance;
+      missile.Fire(owner, pos + new Vector2(xOffset, yOffset), vel);
+    }
+
   }
 
   public void Fire(Ship ship, Vector2 position, Vector2 velocity)
@@ -123,14 +150,12 @@ public class Missile : MonoBehaviour
     mRigidBody.velocity = velocity;
     mRigidBody.angularVelocity = 0.0f;
     mRenderer.visible = true;
-    isActive = true;
     mTimer = 0.0f;
     mMode = 0;
     owner = ship;
 
     if (mAnimator != null)
     {
-      mAnimator.animation = animation;
       mAnimator.playing = true;
       mAnimator.time = 0.0f;
     }

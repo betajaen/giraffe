@@ -53,10 +53,6 @@ public class Enemy : Ship
 
   [HideInInspector]
   [NonSerialized]
-  public bool isActive;
-
-  [HideInInspector]
-  [NonSerialized]
   public bool isAlive;
 
   [NonSerialized]
@@ -69,7 +65,7 @@ public class Enemy : Ship
   private Transform mTransform;
 
   [SerializeField]
-  public GiraffeSpriteAnimation explosionAnimation;
+  public GameObject explosionMissile;
 
   [SerializeField]
   public GiraffeSpriteAnimation[] verticalAnimations;
@@ -81,14 +77,16 @@ public class Enemy : Ship
   private float mVelocityY;
 
   [NonSerialized]
-  private EnemyWave mWave;
+  public EnemyWave wave;
 
   [NonSerialized]
-  private EnemyFactory mFactory;
+  public EnemyFactory factory;
+
+  [NonSerialized]
+  public MissileFactory missileFactory;
 
   void Awake()
   {
-    isActive = true;
     isAlive = true;
     mTransform = GetComponent<Transform>();
     mRenderer = GetComponent<GiraffeQuadSpriteRenderer>();
@@ -101,24 +99,22 @@ public class Enemy : Ship
 
   void FixedUpdate()
   {
-    if (isAlive && isActive)
+    if (isAlive)
     {
       UpdateMovement();
     }
-    else if (!isAlive && isActive)
+    else if (!isAlive)
     {
-      if (mAnimator.animation != explosionAnimation)
+
+      if (explosionMissile != null)
       {
-        mAnimator.animation = explosionAnimation;
-        mAnimator.time = 0.0f;
-        mAnimator.playing = true;
+        var explosion = missileFactory.Add(explosionMissile);
+        explosion.Fire(this, mTransform.position, new Vector2(mVelocityX, mVelocityY));
       }
 
-      if (mAnimator.playing == false)
-      {
-        isActive = false;
-        mTransform.position = new Vector2(Screen.width + 100, 0);
-      }
+      wave.enemies.Remove(this);
+      gameObject.SetActive(false);
+
     }
   }
 
@@ -127,9 +123,8 @@ public class Enemy : Ship
     mOriginX = mX = x;
     mOriginY = mY = y;
     mAngle = UnityEngine.Random.Range(-Mathf.PI, Mathf.PI) * Mathf.Rad2Deg;
-    isActive = true;
     isAlive = true;
-    mWave = wave;
+    this.wave = wave;
 
     if (verticalAnimations.Length == 1)
       mAnimator.animation = verticalAnimations[0];
@@ -186,8 +181,8 @@ public class Enemy : Ship
     if (mX < -100)
     {
       isAlive = false;
-      isActive = false;
-      mWave.enemies.Remove(this);
+      gameObject.SetActive(false);
+      wave.enemies.Remove(this);
     }
 
     if (verticalAnimations.Length == 3)
@@ -219,7 +214,7 @@ public class Enemy : Ship
     if (missile.owner == this)
       return;
     isAlive = false;
-    mWave.enemies.Remove(this);
+    wave.enemies.Remove(this);
   }
 
   public override void Hit(Ship ship)

@@ -71,9 +71,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 200
   type: 1
-  explosiveRadius: 70
+  explosiveRadius: 25
   animation: {fileID: 0}
   explosionAnimation: {fileID: 11400000, guid: 619ad6e68c975b1479e478c8af7ed08b, type: 2}
+  secondaryMissile: {fileID: 100000, guid: 2b2128f9b56cb234ebd278963c8281a8, type: 2}
+  secondaryMissileMin: 6
+  secondaryMissileMax: 12
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,8 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mSpriteName: Bomb/0
-  offsetX: 0
-  offsetY: 0
+  mScale: 1
   visible: 1
 --- !u!1001 &100100000
 Prefab:

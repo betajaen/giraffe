@@ -68,6 +68,13 @@ public class GiraffeQuadSpriteRendererEditor : Editor
       }
     }
 
+    GUI.changed = false;
+    mRenderer.scale = EditorGUILayout.FloatField("Scale", mRenderer.scale);
+    if (GUI.changed)
+    {
+      changed = true;
+    }
+
     EditorGUI.indentLevel--;
 
     GUILayout.EndVertical();

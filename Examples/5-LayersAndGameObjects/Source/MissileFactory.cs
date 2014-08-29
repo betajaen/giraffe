@@ -27,23 +27,23 @@ public class MissileFactory : MonoBehaviour
     Missile missile = null;
     foreach (var m in missiles)
     {
-      if (m.isActive == false)
+      if (m.gameObject.activeSelf == false)
       {
         missile = m;
         break;
       }
     }
+
     if (missile == null)
     {
       GameObject go = Instantiate(prefab) as GameObject;
       go.transform.parent = transform;
       missile = go.GetComponent<Missile>();
+      missile.factory = this;
       missiles.Add(missile);
     }
-    else
-    {
-      missile.gameObject.SetActive(true);
-    }
+
+    missile.gameObject.SetActive(true);
 
     return missile;
   }

@@ -13,10 +13,7 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
   private GiraffeSprite mSprite;
 
   [SerializeField]
-  public int offsetX;
-
-  [SerializeField]
-  public int offsetY;
+  private float mScale = 1.0f;
 
   [NonSerialized]
   private Transform mTransform;
@@ -46,9 +43,17 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
     mApplicationIsQuitting = true;
   }
 
+  void OnEnable()
+  {
+    if (mManager != null)
+    {
+      mManager.Add(this);
+    }
+  }
+
   void OnDisable()
   {
-    if (mApplicationIsQuitting == false)
+    if (mManager != null && mApplicationIsQuitting == false)
     {
       mManager.Remove(this);
     }
@@ -78,7 +83,7 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
 
   void RefreshTransform2D()
   {
-    mTransform2D = Matrix2D.TRS(mTransform.position, 0.0f, sprite.size);
+    mTransform2D = Matrix2D.TRS(mTransform.position, 0.0f, sprite.size * mScale);
   }
 
   public GiraffeLayer layer
@@ -125,6 +130,16 @@ public class GiraffeQuadSpriteRenderer : MonoBehaviour, IGirrafeQuadEventListene
       return mLayer.atlas;
     }
   }
+
+  public float scale
+  {
+    get { return mScale; }
+    set
+    {
+      mScale = value;
+    }
+  }
+
   void FindParts()
   {
     mLayer = GiraffeInternal.GiraffeUtils.FindRecursiveComponentBackwards<GiraffeLayer>(mTransform);
