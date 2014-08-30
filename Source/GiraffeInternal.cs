@@ -72,6 +72,7 @@ namespace GiraffeInternal
     private bool mClearThisTime;
     private Vector3 mTransformPosition;
     private Vector3 mTransformScale;
+    private Vector3 mQuadOffset;
     private Matrix4x4 mTransform;
 
     public Color32 colour = new Color32(255, 255, 255, 255);
@@ -155,23 +156,23 @@ namespace GiraffeInternal
       // | \ |
       // 3--\2
 
-      tP0.x = x;
-      tP0.y = y;
+      tP0.x = (x + mQuadOffset.x);
+      tP0.y = (y + mQuadOffset.y);
       tU0.x = sprite.x0;
       tU0.y = sprite.y1;
 
-      tP1.x = (x + w);
-      tP1.y = y;
+      tP1.x = (x + mQuadOffset.x);
+      tP1.y = (y + mQuadOffset.y);
       tU1.x = sprite.x1;
       tU1.y = sprite.y1;
 
-      tP2.x = (x + w);
-      tP2.y = (y + h);
+      tP2.x = (x + w + mQuadOffset.x);
+      tP2.y = (y + h + mQuadOffset.y);
       tU2.x = sprite.x1;
       tU2.y = sprite.y0;
 
-      tP3.x = x;
-      tP3.y = (y + h);
+      tP3.x = (x + mQuadOffset.x);
+      tP3.y = (y + h + mQuadOffset.y);
       tU3.x = sprite.x0;
       tU3.y = sprite.y0;
 
@@ -212,18 +213,30 @@ namespace GiraffeInternal
       // 3--\2
 
       transform.Transform(-0.5f, -0.5f, ref tP0.x, ref tP0.y);
+      tP0.x += mQuadOffset.x;
+      tP0.y += mQuadOffset.y;
+
       tU0.x = sprite.x0;
       tU0.y = sprite.y1;
 
       transform.Transform(0.5f, -0.5f, ref tP1.x, ref tP1.y);
+      tP1.x += mQuadOffset.x;
+      tP1.y += mQuadOffset.y;
+
       tU1.x = sprite.x1;
       tU1.y = sprite.y1;
 
       transform.Transform(0.5f, 0.5f, ref tP2.x, ref tP2.y);
+      tP2.x += mQuadOffset.x;
+      tP2.y += mQuadOffset.y;
+
       tU2.x = sprite.x1;
       tU2.y = sprite.y0;
 
       transform.Transform(-0.5f, 0.5f, ref tP3.x, ref tP3.y);
+      tP3.x += mQuadOffset.x;
+      tP3.y += mQuadOffset.y;
+
       tU3.x = sprite.x0;
       tU3.y = sprite.y0;
 

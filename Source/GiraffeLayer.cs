@@ -167,6 +167,16 @@ public class GiraffeLayer : MonoBehaviour
     mLayer.colour = new Color32(r, g, b, a);
   }
 
+  public void SetOffset(float x, float y)
+  {
+    mLayer.SetOffset(new Vector2(x, y));
+  }
+
+  public void SetOffset(Vector2 offset)
+  {
+    mLayer.SetOffset(offset);
+  }
+
   public void Add(int x, int y, String spriteName)
   {
     GiraffeSprite sprite = mAtlas.GetSprite(spriteName);
