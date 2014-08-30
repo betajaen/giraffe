@@ -167,14 +167,14 @@ public class GiraffeLayer : MonoBehaviour
     mLayer.colour = new Color32(r, g, b, a);
   }
 
-  public void SetOffset(float x, float y)
+  public void SetQuadOrigin(float x, float y)
   {
-    mLayer.SetOffset(new Vector2(x, y));
+    mLayer.quadOrigin = new Vector2(x, y);
   }
 
-  public void SetOffset(Vector2 offset)
+  public void SetQuadOrigin(Vector2 origin)
   {
-    mLayer.SetOffset(offset);
+    mLayer.quadOrigin = origin;
   }
 
   public void Add(int x, int y, String spriteName)
