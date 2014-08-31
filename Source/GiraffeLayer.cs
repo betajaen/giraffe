@@ -51,8 +51,6 @@ public class GiraffeLayer : MonoBehaviour
     }
 
     mesh = new Mesh();
-    mLayer = new Layer(mesh, mAtlas.material, mScale);
-    mAtlas.RefreshSprites();
 
     if (mScale <= 0)
       mScale = 1;
@@ -102,6 +100,10 @@ public class GiraffeLayer : MonoBehaviour
       if (mAtlas == value)
         return;
       mAtlas = value;
+      if (Application.isPlaying && mApplicationIsQuitting == false)
+      {
+        mAtlas.RefreshSprites();
+      }
     }
   }
 
@@ -144,16 +146,33 @@ public class GiraffeLayer : MonoBehaviour
 
   public void UpdateLayer()
   {
-    mLayer.Update();
+    if (mLayer != null)
+    {
+      mLayer.Update();
+    }
   }
 
   public void DrawLayer()
   {
-    mLayer.Draw();
+    if (mLayer != null)
+    {
+      mLayer.Draw();
+    }
   }
 
   public void Begin(int nbQuads)
   {
+    if (mLayer == null)
+    {
+      if (mAtlas == null)
+      {
+        throw new Exception("An atlas must be given to a GiraffeLayer before drawing to it");
+      }
+
+      mLayer = new Layer(mesh, mAtlas.material, mScale);
+      mAtlas.RefreshSprites();
+    }
+
     mLayer.Begin(nbQuads);
   }
 
