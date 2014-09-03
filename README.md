@@ -84,6 +84,8 @@ I consider the core part of Giraffe complete, additional features should be adde
 Any examples, or screenshots I can see?
 ---------------------------------------
 
+Yes, there are plenty of [examples and sample components](https://github.com/betajaen/giraffe-examples) for integration into Unity, including:
+
 ## [1 - Rectangles](https://github.com/betajaen/giraffe-examples/tree/master/1-Rectangles)
 
 ![Rectangles](https://raw.githubusercontent.com/betajaen/giraffe-examples/master//1-Rectangles/Example.png)
