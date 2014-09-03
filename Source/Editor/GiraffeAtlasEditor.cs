@@ -47,12 +47,8 @@ public class GiraffeAtlasEditor : Editor
   }
 
   [MenuItem("Assets/Create/Giraffe Atlas")]
-  static void CreateAtlas()
+  public static void CreateAtlas()
   {
-    GiraffeAtlas atlas = ScriptableObject.CreateInstance<GiraffeAtlas>();
-    System.Random rng = new System.Random();
-    atlas.atlasIdA = rng.Next();
-    atlas.atlasIdB = rng.Next();
 
     string path = AssetDatabase.GetAssetPath(Selection.activeObject);
     if (path == "")
@@ -64,8 +60,21 @@ public class GiraffeAtlasEditor : Editor
       path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
     }
 
-    string atlasPath = AssetDatabase.GenerateUniqueAssetPath(path + "/New Giraffe Atlas.asset");
-    string texturePath = AssetDatabase.GenerateUniqueAssetPath(path + "/New Giraffe Atlas Texture.png");
+    GiraffeAtlas atlas = CreateAtlas(path, "New Giraffe Atlas");
+    EditorUtility.FocusProjectWindow();
+    Selection.activeObject = atlas;
+  }
+
+  public static GiraffeAtlas CreateAtlas(String path, String assetName)
+  {
+
+    GiraffeAtlas atlas = ScriptableObject.CreateInstance<GiraffeAtlas>();
+    System.Random rng = new System.Random();
+    atlas.atlasIdA = rng.Next();
+    atlas.atlasIdB = rng.Next();
+
+    string atlasPath = AssetDatabase.GenerateUniqueAssetPath(String.Format("{0}/{1}.asset", path, assetName));
+    string texturePath = AssetDatabase.GenerateUniqueAssetPath(String.Format("{0}/{1} Texture.png", path, assetName));
 
     Texture2D pngTexture = new Texture2D(256, 256, TextureFormat.ARGB32, false, false);
     pngTexture.hideFlags = HideFlags.HideAndDontSave;
@@ -76,6 +85,7 @@ public class GiraffeAtlasEditor : Editor
     Object.DestroyImmediate(pngTexture);
 
     AssetDatabase.CreateAsset(atlas, atlasPath);
+
     AssetDatabase.SaveAssets();
     AssetDatabase.Refresh();
 
@@ -93,9 +103,9 @@ public class GiraffeAtlasEditor : Editor
 
     EditorUtility.SetDirty(atlas);
     EditorUtility.SetDirty(texImporter);
+    AssetDatabase.SaveAssets();
 
-    EditorUtility.FocusProjectWindow();
-    Selection.activeObject = atlas;
+    return atlas;
   }
 
   private GiraffeAtlas mAtlas;
