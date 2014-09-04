@@ -84,9 +84,11 @@ I consider the core part of Giraffe complete, additional features should be adde
 Any examples, or screenshots I can see?
 ---------------------------------------
 
-## [1 - Rectangles](https://github.com/betajaen/giraffe/tree/master/Examples/1-Rectangles)
+Yes, there are plenty of [examples and sample components](https://github.com/betajaen/giraffe-examples) for integration into Unity, including:
 
-![Rectangles](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/1-Rectangles/Example.png)
+## [1 - Rectangles](https://github.com/betajaen/giraffe-examples/tree/master/1-Rectangles)
+
+![Rectangles](https://raw.githubusercontent.com/betajaen/giraffe-examples/master//1-Rectangles/Example.png)
 
 
 Rectangles just shows a random number of rectangles on the screen, demonstrating:
@@ -95,9 +97,9 @@ Rectangles just shows a random number of rectangles on the screen, demonstrating
 * Setting up the Giraffe Singleton and a Layer, using the Rectangles Atlas.
 * Creation of many randomised boxes on the screen using Giraffe Layer.Begin/GiraffeLayer.End.
 
-## [2 - Tilesets](https://github.com/betajaen/giraffe/tree/master/Examples/2-Tilesets)
+## [2 - Tilesets](https://github.com/betajaen/giraffe-examples/tree/master/2-Tilesets)
 
-![Tilesets](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/2-Tilesets/Example.png)
+![Tilesets](https://raw.githubusercontent.com/betajaen/giraffe-examples/master//2-Tilesets/Example.png)
 
 Tilesets shows of the Grid based Tileset importer for the Atlas, and showing that tileset as from a pre-made map, it , demonstrates:
 
@@ -106,18 +108,18 @@ Tilesets shows of the Grid based Tileset importer for the Atlas, and showing tha
 * Loading a map created by Tiled, via a simple importer
 * Showing that map on the screen
 
-## [3 - Updates and Transforms](https://github.com/betajaen/giraffe/tree/master/Examples/3-UpdatesAndTransforms)
+## [3 - Updates and Transforms](https://github.com/betajaen/giraffe-examples/tree/master/3-UpdatesAndTransforms)
 
-![Updates and Transforms](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/3-UpdatesAndTransforms/Example.png)
+![Updates and Transforms](https://raw.githubusercontent.com/betajaen/giraffe-examples/master//3-UpdatesAndTransforms/Example.png)
 
 This is a demonstration  of updating the layer each frame, and rotating and scaling the sprite using the Matrix2D struct, it shows:
 
 * Frame-by-frame updating
 * Using the TRS (Translate-Rotate-Scale) function of Matrix2D to generate a matrix for a rotatable sprite.
 
-## [4 - Text Rendering](https://github.com/betajaen/giraffe/tree/master/Examples/4-TextRendering)
+## [4 - Text Rendering](https://github.com/betajaen/giraffe-examples/tree/master/4-TextRendering)
 
-![Text Rendering](https://raw.githubusercontent.com/betajaen/giraffe/master/Examples/4-TextRendering/Example.png)
+![Text Rendering](https://raw.githubusercontent.com/betajaen/giraffe-examples/master//4-TextRendering/Example.png)
 
 This is a demonstration of rendering text, by using the optional GorillaFont component. In this example, it uses a bitmap font to draw text on the screen. In particular it demonstrates;
 
