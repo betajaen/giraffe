@@ -243,7 +243,7 @@ public class GiraffeAtlasEditor : Editor
 
       GUI.changed = false;
 
-      bool select = GUILayout.Toggle(isSelected, sprite.name, EditorStyles.foldout);
+      GUILayout.Toggle(isSelected, sprite.name, EditorStyles.foldout);
       if (GUI.changed)
       {
         if (isSelected)
@@ -428,8 +428,6 @@ public class GiraffeAtlasEditor : Editor
 
     GUI.changed = false;
 
-    EditorGUIUtility.LookLikeInspector();
-
     mAtlas._importData.generateWhiteTexture = EditorGUILayout.Toggle("Make 'Giraffe/White' sprite",
       mAtlas._importData.generateWhiteTexture);
 
@@ -584,22 +582,6 @@ public class GiraffeAtlasEditor : Editor
 
   }
 
-  class TextureCoordSet
-  {
-    public struct PixelCoords
-    {
-      public String name;
-      public int x, y;
-      public int w, h;
-    }
-
-    public List<PixelCoords> coords;
-
-    public TextureCoordSet()
-    {
-      coords = new List<PixelCoords>(1);
-    }
-  }
 
   const int kWhiteTexSize = 4;
 
@@ -607,9 +589,7 @@ public class GiraffeAtlasEditor : Editor
   {
     mAtlas._importData.atlasOutOfDate = false;
 
-    // Add white texture.
     Texture2D whiteTex = null;
-
     GiraffeAtlasBuilder builder = new GiraffeAtlasBuilder();
 
     builder.Begin(mAtlas.texture, mAtlas._importData.border, mAtlas._importData.padding);

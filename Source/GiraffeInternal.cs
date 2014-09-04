@@ -66,7 +66,6 @@ namespace GiraffeInternal
     private Mesh mMesh;
     private Material mMaterial;
     private float mInvTextureWidth, mInvTextureHeight;
-    private int mEstimatedQuads;
     private int mPositionIterator, mIndexIterator, mIndex;
     private int mUpdateCount, mDrawCount;
     private bool mClearThisTime;

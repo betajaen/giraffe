@@ -43,8 +43,6 @@ public class Giraffe : MonoBehaviour
     mLayers.Sort((a, b) => a.zOrder.CompareTo(b.zOrder));
   }
 
-  private int counter = 0;
-
   void Update()
   {
     mCamera.orthographicSize = Screen.height * 0.5f;

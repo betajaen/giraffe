@@ -88,9 +88,6 @@ public class GiraffeAtlas : ScriptableObject
   [NonSerialized]
   public int _importDataResolved;
 
-  [SerializeField]
-  private String mEditorData;
-
   [NonSerialized]
   private Material mMaterial;
 

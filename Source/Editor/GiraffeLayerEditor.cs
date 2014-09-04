@@ -10,7 +10,7 @@ public class GiraffeLayerEditor : Editor
     GiraffeLayer t = (GiraffeLayer)this.target;
 
     GUI.changed = false;
-    GiraffeAtlas atlas = EditorGUILayout.ObjectField("Atlas", t.atlas, typeof(GiraffeAtlas)) as GiraffeAtlas;
+    GiraffeAtlas atlas = EditorGUILayout.ObjectField("Atlas", t.atlas, typeof(GiraffeAtlas), false) as GiraffeAtlas;
     if (GUI.changed)
     {
       t.atlas = atlas;
