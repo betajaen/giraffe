@@ -46,12 +46,6 @@ public class Giraffe : MonoBehaviour
   void Update()
   {
     mCamera.orthographicSize = Screen.height * 0.5f;
-
-    int count = mLayers.Count;
-    for (int i = 0; i < count; i++)
-    {
-      mLayers[i].UpdateLayer();
-    }
   }
 
   void OnPostRender()

@@ -144,14 +144,6 @@ public class GiraffeLayer : MonoBehaviour
     }
   }
 
-  public void UpdateLayer()
-  {
-    if (mLayer != null)
-    {
-      mLayer.Update();
-    }
-  }
-
   public void DrawLayer()
   {
     if (mLayer != null)

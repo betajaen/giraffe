@@ -65,9 +65,7 @@ namespace GiraffeInternal
     private MeshBuffer mBuffer;
     private Mesh mMesh;
     private Material mMaterial;
-    private float mInvTextureWidth, mInvTextureHeight;
     private int mPositionIterator, mIndexIterator, mIndex;
-    private int mUpdateCount, mDrawCount;
     private bool mClearThisTime;
     private Vector3 mTransformPosition;
     private Vector3 mTransformScale;
@@ -80,26 +78,18 @@ namespace GiraffeInternal
     {
       mMesh = mesh;
       mMaterial = material;
-      Texture texture = mMaterial.mainTexture;
-      mInvTextureWidth = 1.0f / texture.width;
-      mInvTextureHeight = 1.0f / texture.height;
       mTransformScale = new Vector3(1.0f, -1.0f, 1.0f);
 
       mBuffer = new MeshBuffer();
 
-      const float depth = 0.0f;
-      tP0.z = depth;
-      tP1.z = depth;
-      tP2.z = depth;
-      tP3.z = depth;
+      const float kDepth = 0.0f;
+      tP0.z = kDepth;
+      tP1.z = kDepth;
+      tP2.z = kDepth;
+      tP3.z = kDepth;
 
       mTransformPosition = new Vector3(-Screen.width * 0.5f, Screen.height * 0.5f, 0.0f);
       SetScale(scale);
-    }
-
-    public void Update()
-    {
-      mUpdateCount++;
     }
 
     public void SetScale(int scale)
@@ -118,7 +108,6 @@ namespace GiraffeInternal
 
     public void Draw()
     {
-      mDrawCount++;
       mMaterial.SetPass(0);
       Graphics.DrawMeshNow(mMesh, mTransform);
     }
@@ -131,9 +120,7 @@ namespace GiraffeInternal
       int nbVertices = verticesPerQuad * nbQuads;
       int nbIndexes = indexesPerQuad * nbQuads;
 
-      int changes = mBuffer.bufferChanges;
       mClearThisTime = mBuffer.Reserve(nbVertices, nbIndexes);
-
 
       mPositionIterator = 0;
       mIndexIterator = 0;
