@@ -33,6 +33,9 @@ public class GiraffeLayer : MonoBehaviour
   [NonSerialized]
   private Mesh mesh;
 
+  [SerializeField]
+  private bool mVisible = true;
+
   void Awake()
   {
     mApplicationIsQuitting = false;
@@ -136,6 +139,8 @@ public class GiraffeLayer : MonoBehaviour
     {
       if (mScale == value)
         return;
+      if (value < 1)
+        value = 1;
       mScale = value;
       if (Application.isPlaying && mApplicationIsQuitting == false)
       {
@@ -144,9 +149,24 @@ public class GiraffeLayer : MonoBehaviour
     }
   }
 
+  public bool visible
+  {
+    get
+    {
+      return mVisible;
+    }
+    set
+    {
+      if (Application.isPlaying && mApplicationIsQuitting == false)
+      {
+        mVisible = value;
+      }
+    }
+  }
+
   public void DrawLayer()
   {
-    if (mLayer != null)
+    if (visible && mLayer != null)
     {
       mLayer.Draw();
     }
